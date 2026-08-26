@@ -620,7 +620,7 @@ footer a:hover{border-bottom-color:var(--accent);}
     <div class="plans" id="plans"></div>
     <div class="fine">
       <div><b data-i18n="price.f1b">14 kun bepul</b><span data-i18n="price.f1">— sinov muddati, keyin hal qilasiz</span></div>
-      <div><b data-i18n="price.f2b">1 kompyuter + 1 telefon</b><span data-i18n="price.f2">— har bir foydalanuvchi uchun</span></div>
+      <div><b data-i18n="price.f2b">4 ta qurilma</b><span data-i18n="price.f2">— har bir foydalanuvchi uchun</span></div>
       <div><b data-i18n="price.f3b">O'rnatish va o'qitish</b><span data-i18n="price.f3">— biz tomondan, qo'shimcha to'lovsiz</span></div>
     </div>
   </div>
@@ -830,7 +830,7 @@ const STR = {
     'apps': [
       ['Brauzer', 'Har qanday kompyuter', "Ustaxonadagi bitta kompyuterga o'rnatiladi, qolganlari brauzer orqali kiradi. Alohida dastur shart emas."],
       ['Windows', 'Ish stoli ilovasi', "Kompyuterga o'rnatiladigan ilova — ish stolidan bitta bosishda ochiladi."],
-      ['Android', 'Telefon ilovasi', "Sexda yurib turib ham: vazifani olish, rasm yuklash, tugatish. Ustaxona tarmog'i yetarli."]
+      ['Android', 'Telefon ilovasi', "Sexda yurib turib ham: vazifani olish, rasm yuklash, tugatish. Aloqa uzilsa, avval ochilgan ma'lumot ko'rinib turadi va yozilgan izoh keyin yuboriladi."]
     ],
     'apps.install': "Ilovalar ustaxonangizdagi UstaCRM serveriga ulanadi: avval tizim o'rnatiladi, keyin ilovada server manzili ko'rsatiladi. Android telefon o'rnatishdan oldin «noma'lum manbadan o'rnatish»ga ruxsat so'raydi.",
     'apps.soon': 'iPhone uchun ilova tayyorlanmoqda.',
@@ -849,19 +849,19 @@ const STR = {
     'price.lead': "To'lov ustaxona uchun, xodim boshiga emas. Sinov davrida karta so'ralmaydi.",
     'plans': [
       ['Bepul', '0', 'UZS', '', ['1 foydalanuvchi', 'Buyurtmalar va ombor', 'Bitta ustaxona', 'Asosiy hisobotlar'], [], 'Sinab ko\'rish'],
-      ['Standart', '49 999', 'UZS / oy', "Ko'p tanlanadi", ['5 foydalanuvchigacha', 'Barcha imkoniyatlar', 'Ishbay oylik va hisobotlar', "Qo'llab-quvvatlash"], ['Excelga eksport', 'Mijozga avtomatik xabar'], 'Tanlash'],
+      ['Standart', '49 999', 'UZS / oy', "Ko'p tanlanadi", ['5 foydalanuvchigacha', 'Barcha imkoniyatlar', 'Ishbay oylik va hisobotlar', 'Excelga eksport', "Qo'llab-quvvatlash"], ['Mijozga avtomatik xabar'], 'Tanlash'],
       ['Pro', '149 999', 'UZS / oy', '', ['Cheklanmagan foydalanuvchi', 'Kengaytirilgan hisobotlar', 'Ustuvor qo\'llab-quvvatlash'], ['Bir nechta filial'], 'Bog\'lanish']
     ],
     'price.soon': 'tez orada',
     'price.f1b': '14 kun bepul', 'price.f1': '— sinov muddati, keyin hal qilasiz',
-    'price.f2b': '1 kompyuter + 1 telefon', 'price.f2': '— har bir foydalanuvchi uchun',
+    'price.f2b': '4 ta qurilma', 'price.f2': '— har bir foydalanuvchi uchun',
     'price.f3b': "O'rnatish va o'qitish", 'price.f3': "— biz tomondan, qo'shimcha to'lovsiz",
 
     'road.eyebrow': 'Reja', 'road.title': 'Qachon nima tayyor bo\'ladi',
     'road': [
       ['Hozir', 'Prototip', "Interfeys va asosiy jarayonlar tayyor — ustaxonalar bilan sinovdan o'tkazyapmiz."],
       ['Keyingi qadam', 'Beta', "Tanlangan ustaxonalarda real ish sharoitida — bepul, biz bilan birga."],
-      ['Rejada', 'Ommaviy versiya', "Mijozga avtomatik xabar, Excelga eksport, kassa hisobi, iOS ilova va filiallar."]
+      ['Rejada', 'Ommaviy versiya', "Mijozga avtomatik xabar, kassa hisobi, iOS ilova va filiallar."]
     ],
 
     'form.eyebrow': 'Bepul sinov',
@@ -979,7 +979,7 @@ const STR = {
     'apps': [
       ['Браузер', 'Любой компьютер', 'Ставится на один компьютер в цехе, остальные заходят через браузер. Отдельная программа не нужна.'],
       ['Windows', 'Приложение для ПК', 'Устанавливается на компьютер и открывается с рабочего стола одним нажатием.'],
-      ['Android', 'Приложение для телефона', 'Прямо в цехе: взять задачу, загрузить фото, закрыть этап. Достаточно сети цеха.']
+      ['Android', 'Приложение для телефона', 'Прямо в цехе: взять задачу, загрузить фото, закрыть этап. Пропала связь — ранее открытые данные остаются на экране, а написанный комментарий уйдёт позже.']
     ],
     'apps.install': 'Приложения подключаются к вашему серверу UstaCRM: сначала устанавливается система, затем в приложении указывается адрес сервера. Перед установкой Android-телефон попросит разрешить установку из неизвестного источника.',
     'apps.soon': 'Приложение для iPhone готовится.',
@@ -998,19 +998,19 @@ const STR = {
     'price.lead': 'Оплата за цех, а не за каждого сотрудника. На пробный период карта не нужна.',
     'plans': [
       ['Бесплатно', '0', 'UZS', '', ['1 пользователь', 'Заказы и склад', 'Один цех', 'Основные отчёты'], [], 'Попробовать'],
-      ['Стандарт', '49 999', 'UZS / мес', 'Выбирают чаще', ['До 5 пользователей', 'Все возможности', 'Сдельная зарплата и отчёты', 'Поддержка'], ['Экспорт в Excel', 'Автоуведомления клиенту'], 'Выбрать'],
+      ['Стандарт', '49 999', 'UZS / мес', 'Выбирают чаще', ['До 5 пользователей', 'Все возможности', 'Сдельная зарплата и отчёты', 'Экспорт в Excel', 'Поддержка'], ['Автоуведомления клиенту'], 'Выбрать'],
       ['Pro', '149 999', 'UZS / мес', '', ['Без ограничения пользователей', 'Расширенные отчёты', 'Приоритетная поддержка'], ['Несколько филиалов'], 'Связаться']
     ],
     'price.soon': 'скоро',
     'price.f1b': '14 дней бесплатно', 'price.f1': '— пробный период, потом решаете',
-    'price.f2b': '1 компьютер + 1 телефон', 'price.f2': '— на каждого пользователя',
+    'price.f2b': '4 устройства', 'price.f2': '— на каждого пользователя',
     'price.f3b': 'Установка и обучение', 'price.f3': '— с нашей стороны, без доплаты',
 
     'road.eyebrow': 'План', 'road.title': 'Что и когда будет готово',
     'road': [
       ['Сейчас', 'Прототип', 'Интерфейс и основные процессы готовы — проверяем в реальных цехах.'],
       ['Следующий шаг', 'Бета', 'В выбранных цехах на реальной работе — бесплатно, вместе с нами.'],
-      ['В планах', 'Публичная версия', 'Автоуведомления клиенту, экспорт в Excel, касса, приложение для iOS и филиалы.']
+      ['В планах', 'Публичная версия', 'Автоуведомления клиенту, касса, приложение для iOS и филиалы.']
     ],
 
     'form.eyebrow': 'Бесплатная проба',
@@ -1128,7 +1128,7 @@ const STR = {
     'apps': [
       ['Browser', 'Any computer', 'Installed on one computer in the workshop; everybody else opens it in a browser. No separate program needed.'],
       ['Windows', 'Desktop app', 'Installed on the computer and opened from the desktop in one click.'],
-      ['Android', 'Phone app', 'On the floor: claim a task, upload a photo, complete a stage. The workshop network is enough.']
+      ['Android', 'Phone app', 'On the floor: claim a task, upload a photo, complete a stage. If the connection drops, screens you already opened keep their data and a comment you write is sent later.']
     ],
     'apps.install': 'The apps connect to the UstaCRM server in your own workshop: the system is installed first, then the server address is entered in the app. Before installing, an Android phone asks you to allow installation from an unknown source.',
     'apps.soon': 'An iPhone app is in preparation.',
@@ -1147,19 +1147,19 @@ const STR = {
     'price.lead': 'You pay per workshop, not per head. No card is asked for during the trial.',
     'plans': [
       ['Free', '0', 'UZS', '', ['1 user', 'Orders and stock', 'One workshop', 'Basic reports'], [], 'Start free'],
-      ['Standard', '49 999', 'UZS / month', 'Most chosen', ['Up to 5 users', 'Every feature', 'Piece-rate pay and reports', 'Support'], ['Excel export', 'Automatic client updates'], 'Choose'],
+      ['Standard', '49 999', 'UZS / month', 'Most chosen', ['Up to 5 users', 'Every feature', 'Piece-rate pay and reports', 'Excel export', 'Support'], ['Automatic client updates'], 'Choose'],
       ['Pro', '149 999', 'UZS / month', '', ['Unlimited users', 'Extended reports', 'Priority support'], ['Multiple branches'], 'Talk to us']
     ],
     'price.soon': 'soon',
     'price.f1b': '14 days free', 'price.f1': '— the trial, then you decide',
-    'price.f2b': '1 computer + 1 phone', 'price.f2': '— for each user',
+    'price.f2b': '4 devices', 'price.f2': '— for each user',
     'price.f3b': 'Installation and training', 'price.f3': '— from us, at no extra cost',
 
     'road.eyebrow': 'Roadmap', 'road.title': 'What is ready, and when',
     'road': [
       ['Now', 'Prototype', 'The interface and the core processes are built — we are proving them in real workshops.'],
       ['Next', 'Beta', 'In selected workshops under real working conditions — free, and with us alongside.'],
-      ['Planned', 'Public release', 'Automatic client updates, Excel export, cash accounting, an iOS app and multiple branches.']
+      ['Planned', 'Public release', 'Automatic client updates, cash accounting, an iOS app and multiple branches.']
     ],
 
     'form.eyebrow': 'Free trial',
