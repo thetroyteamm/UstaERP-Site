@@ -1,0 +1,13 @@
+# Line endings are stored as LF inside the repository and written out in whatever form the
+# machine checking them out prefers. Without this, files carry whatever the editor that wrote
+# them produced: this repo was first committed with CRLF, while the machine's own git default
+# is to convert on checkout, so a clone made here produced different bytes than the working
+# copy it was cloned from. Harmless for a page a browser renders either way, but it turns the
+# next edit of any file into a diff against every line of it.
+* text=auto
+
+# The published builds must never be touched by that conversion. Git detects binary content on
+# its own and would skip them anyway; saying it out loud means a careless pattern above can
+# never corrupt an 11MB APK into one that will not install.
+*.apk binary
+*.exe binary
