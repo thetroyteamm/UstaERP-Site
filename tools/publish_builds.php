@@ -3,7 +3,7 @@
  * Copy the current Android and Windows builds into the site's dist/ folder and stamp their
  * version, size and build date into index.html.
  *
- *     E:\XAMPP\php\php.exe tools\publish_builds.php
+ *     php tools/publish_builds.php
  *
  * Run it whenever a new build is published, then upload dist/ together with index.html.
  *
