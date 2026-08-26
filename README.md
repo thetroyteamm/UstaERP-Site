@@ -84,9 +84,10 @@ just needs its `file` value pointing at that URL.
 
 Two things worth knowing before pointing customers at these. An APK downloaded outside the Play
 Store makes the phone ask for permission to install from an unknown source, which the page warns
-about. And the licence binds **two devices per user**: somebody already signed in on a phone and
-in a browser is at the limit, so the desktop app counts as a third and is refused until a slot
-is freed with `revoke_device.php`.
+about. And the licence binds **four devices per user** (raised from two on 2026-08-25, because a
+phone, a browser and the desktop app is already three - the desktop app keeps its own WebView2
+profile and does not share the browser's slot). A fifth is refused, and the refusal now names
+the devices holding the slots; one is freed with `revoke_device.php`.
 
 ## The trial form
 
@@ -112,8 +113,14 @@ correct in one theme and wrong in the other.
 
 ## Honesty rules for this page
 
-The site sells software that exists. Three things in the pitch deck are **not built yet** and
+The site sells software that exists. Four things in the pitch deck are **not built yet** and
 appear here only as "soon" or under the roadmap — automatic client notifications over Telegram,
-Excel export, cash accounting, multiple branches, and the iOS app. Keep them there until they
-ship. A workshop that buys on a promise and finds the feature missing is a refund and a bad
+cash accounting, multiple branches, and the iOS app. Keep them there until they ship.
+
+Excel export **was** on that list and came off it on 2026-08-26: `export_orders.php`,
+`export_payroll.php` and `export_materials.php` exist, so it is now listed as an ordinary
+feature of the Standard plan rather than a promise. That is the only direction this list should
+ever move - a feature leaves it when the code lands, never before.
+
+A workshop that buys on a promise and finds the feature missing is a refund and a bad
 recommendation in a market that runs on recommendations.
