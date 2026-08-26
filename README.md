@@ -71,11 +71,18 @@ Publish a new build with:
 php tools/publish_builds.php
 ```
 
-It copies the APK and the exe out of the CRM project's own `dist` folder — the path is set at
-the top of the script — keeps their build times, and writes the version, size and date into the
+It copies the APK and the exe out of the CRM project's own `dist` folder, keeping their build
+times, and writes the version, size and date into the
 `BUILDS` block in `index.html`. **Do not edit that block by hand:** it is regenerated, and a
 figure typed in by hand is a figure that will be wrong after the next build. Commit and deploy
 `index.html` and `dist/` together.
+
+The script expects the CRM project to sit beside this one. If it lives somewhere else, point
+`USTACRM_BUILDS` at the folder holding the published builds:
+
+```bash
+USTACRM_BUILDS=/path/to/prototype/dist php tools/publish_builds.php
+```
 
 If a build is missing from the source folder, the script writes `null` for it and its button
 disappears. The page checks independently: each button asks the server whether its file is
