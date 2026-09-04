@@ -23,22 +23,22 @@ $siteRoot = dirname(__DIR__);
 // Where publish_apk.sh and publish_exe.sh leave their output. The default assumes the CRM
 // project sits beside this one, which is how the projects are laid out; it is written as a
 // relative path rather than an absolute one so this file names nobody's machine. Set
-// USTACRM_BUILDS to point somewhere else.
-$source  = getenv('USTACRM_BUILDS') ?: $siteRoot . '/../MEBEL_CRM/prototype/dist';
+// USTAERP_BUILDS to point somewhere else.
+$source  = getenv('USTAERP_BUILDS') ?: $siteRoot . '/../UstaERP/prototype/dist';
 $distDir = $siteRoot . '/dist';
 $page    = $siteRoot . '/index.html';
 
 if (!is_dir($source)) {
     fwrite(STDERR, "No build folder at: $source\n");
-    fwrite(STDERR, "Set USTACRM_BUILDS to where ustacrm.apk and UstaCRM.exe are published.\n");
+    fwrite(STDERR, "Set USTAERP_BUILDS to where ustaerp.apk and UstaERP.exe are published.\n");
     exit(1);
 }
 $source = str_replace('\\', '/', realpath($source));
 
 // file in dist/, the file holding its version, and the key the page reads it by
 $builds = [
-    'android' => ['file' => 'ustacrm.apk',  'version' => 'version.txt'],
-    'windows' => ['file' => 'UstaCRM.exe',  'version' => 'exe-version.txt'],
+    'android' => ['file' => 'ustaerp.apk',  'version' => 'version.txt'],
+    'windows' => ['file' => 'UstaERP.exe',  'version' => 'exe-version.txt'],
 ];
 
 if (!is_dir($distDir) && !mkdir($distDir, 0777, true)) {

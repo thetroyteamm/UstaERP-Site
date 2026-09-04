@@ -1,8 +1,8 @@
 <meta charset="utf-8">
-<title>UstaCRM</title>
+<title>UstaERP</title>
 <meta name="description" content="Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, ishbay oylik va muddatlar — bitta tizimda.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="UstaCRM — ustaxonangiz kaftingizda">
+<meta property="og:title" content="UstaERP — ustaxonangiz kaftingizda">
 <meta property="og:description" content="Mebel ustaxonalari uchun CRM: buyurtma, ombor, ishchilar va muddatlar bitta tizimda.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23C75B22' d='M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z'/%3E%3C/svg%3E" type="image/svg+xml">
@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
 
 <!--
-  UstaCRM — public customer site.
+  UstaERP — public customer site.
 
   Design plan (kept here so a later edit does not drift from it):
 
@@ -446,9 +446,9 @@ footer a:hover{border-bottom-color:var(--accent);}
 
 <header class="top">
   <div class="wrap top-in">
-    <a class="brand" href="#top" aria-label="UstaCRM">
+    <a class="brand" href="#top" aria-label="UstaERP">
       <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--brand)" d="M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z"/></svg>
-      <span>UstaCRM</span>
+      <span>UstaERP</span>
     </a>
     <nav>
       <a href="#imkoniyat" data-i18n="nav.features">Imkoniyatlar</a>
@@ -527,7 +527,7 @@ footer a:hover{border-bottom-color:var(--accent);}
       <p data-i18n="pain.lead">Ustaxona kichik ekan — hammasi yodda turadi. Buyurtma ko'paygach, birinchi bo'lib muddat va ombor qo'ldan chiqadi.</p>
     </div>
     <div class="row-head">
-      <span class="a" data-i18n="pain.col1">Hozir</span><span></span><span class="b" data-i18n="pain.col2">UstaCRM bilan</span>
+      <span class="a" data-i18n="pain.col1">Hozir</span><span></span><span class="b" data-i18n="pain.col2">UstaERP bilan</span>
     </div>
     <div class="rows" id="pains"></div>
   </div>
@@ -596,7 +596,7 @@ footer a:hover{border-bottom-color:var(--accent);}
       <p data-i18n="apps.lead">Tizim ustaxonaning o'z kompyuterida turadi. Qolganlari shu tarmoq orqali kiradi: Wi-Fi yoki telefon hotspoti yetarli.</p>
     </div>
     <div class="cards" id="apps"></div>
-    <p class="soon-note" data-i18n="apps.install">Ilovalar ustaxonangizdagi UstaCRM serveriga ulanadi: avval tizim o'rnatiladi, keyin ilovada server manzili ko'rsatiladi. Android telefon o'rnatishdan oldin «noma'lum manbadan o'rnatish»ga ruxsat so'raydi.</p>
+    <p class="soon-note" data-i18n="apps.install">Ilovalar ustaxonangizdagi UstaERP serveriga ulanadi: avval tizim o'rnatiladi, keyin ilovada server manzili ko'rsatiladi. Android telefon o'rnatishdan oldin «noma'lum manbadan o'rnatish»ga ruxsat so'raydi.</p>
     <p class="soon-note" data-i18n="apps.soon">iPhone uchun ilova tayyorlanmoqda.</p>
   </div>
 </section>
@@ -713,7 +713,7 @@ footer a:hover{border-bottom-color:var(--accent);}
     <div>
       <div class="foot-brand">
         <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--brand)" d="M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z"/></svg>
-        <span>UstaCRM</span>
+        <span>UstaERP</span>
       </div>
       <p style="margin-top:8px; max-width:24em;" data-i18n="foot.tag">Mebel ustaxonalari uchun ishlab chiqarish CRM tizimi.</p>
     </div>
@@ -729,7 +729,7 @@ footer a:hover{border-bottom-color:var(--accent);}
       </div>
       <div>
         <b data-i18n="foot.year">Yil</b>
-        <span>© 2026 UstaCRM</span>
+        <span>© 2026 UstaERP</span>
       </div>
     </div>
   </div>
@@ -769,7 +769,7 @@ const STR = {
     'pain.eyebrow': 'Tanish holat',
     'pain.title': 'Hisob daftarda qoladi, nazorat esa boshda',
     'pain.lead': "Ustaxona kichik ekan — hammasi yodda turadi. Buyurtma ko'paygach, birinchi bo'lib muddat va ombor qo'ldan chiqadi.",
-    'pain.col1': 'Hozir', 'pain.col2': 'UstaCRM bilan',
+    'pain.col1': 'Hozir', 'pain.col2': 'UstaERP bilan',
     'pains': [
       ["Hisob daftarda va Excelda yuritiladi", "Har bir buyurtma o'z kartasida: mijoz, muddat, material, bosqich"],
       ["Buyurtma yo'qoladi, muddat o'tib ketadi", "Kechikkan buyurtma o'zi belgilanadi — so'ramasdan ko'rinadi"],
@@ -833,7 +833,7 @@ const STR = {
       ['Windows', 'Ish stoli ilovasi', "Kompyuterga o'rnatiladigan ilova — ish stolidan bitta bosishda ochiladi."],
       ['Android', 'Telefon ilovasi', "Sexda yurib turib ham: vazifani olish, rasm yuklash, tugatish. Aloqa uzilsa, avval ochilgan ma'lumot ko'rinib turadi va yozilgan izoh keyin yuboriladi."]
     ],
-    'apps.install': "Ilovalar ustaxonangizdagi UstaCRM serveriga ulanadi: avval tizim o'rnatiladi, keyin ilovada server manzili ko'rsatiladi. Android telefon o'rnatishdan oldin «noma'lum manbadan o'rnatish»ga ruxsat so'raydi.",
+    'apps.install': "Ilovalar ustaxonangizdagi UstaERP serveriga ulanadi: avval tizim o'rnatiladi, keyin ilovada server manzili ko'rsatiladi. Android telefon o'rnatishdan oldin «noma'lum manbadan o'rnatish»ga ruxsat so'raydi.",
     'apps.soon': 'iPhone uchun ilova tayyorlanmoqda.',
     'dl.get': 'Yuklab olish', 'dl.version': 'Versiya',
 
@@ -882,7 +882,7 @@ const STR = {
     'form.done_lead': "Quyidagi xabarni Telegramga qo'ying yoki qo'ng'iroq qilib ayting — bir ish kunida bog'lanamiz.",
     'form.copy': 'Nusxa olish', 'form.copied': 'Nusxa olindi',
     'form.tg': 'Telegram', 'form.phone_btn': "Qo'ng'iroq", 'form.again': "Qaytadan to'ldirish",
-    'form.msg_head': 'UstaCRM — bepul sinov so\'rovi',
+    'form.msg_head': 'UstaERP — bepul sinov so\'rovi',
     'form.m_name': 'Ism', 'form.m_phone': 'Telefon', 'form.m_shop': 'Ustaxona',
     'form.m_city': 'Shahar', 'form.m_size': 'Xodimlar', 'form.m_note': 'Izoh',
 
@@ -918,7 +918,7 @@ const STR = {
     'pain.eyebrow': 'Знакомая картина',
     'pain.title': 'Учёт в тетради, а контроль — в голове',
     'pain.lead': 'Пока цех маленький, всё держится в памяти. С ростом заказов первыми теряются сроки и остатки на складе.',
-    'pain.col1': 'Сейчас', 'pain.col2': 'С UstaCRM',
+    'pain.col1': 'Сейчас', 'pain.col2': 'С UstaERP',
     'pains': [
       ['Учёт ведётся в тетради и в Excel', 'У каждого заказа своя карточка: клиент, срок, материалы, этап'],
       ['Заказ теряется, срок проходит', 'Просроченный заказ отмечается сам — видно без напоминаний'],
@@ -982,7 +982,7 @@ const STR = {
       ['Windows', 'Приложение для ПК', 'Устанавливается на компьютер и открывается с рабочего стола одним нажатием.'],
       ['Android', 'Приложение для телефона', 'Прямо в цехе: взять задачу, загрузить фото, закрыть этап. Пропала связь — ранее открытые данные остаются на экране, а написанный комментарий уйдёт позже.']
     ],
-    'apps.install': 'Приложения подключаются к вашему серверу UstaCRM: сначала устанавливается система, затем в приложении указывается адрес сервера. Перед установкой Android-телефон попросит разрешить установку из неизвестного источника.',
+    'apps.install': 'Приложения подключаются к вашему серверу UstaERP: сначала устанавливается система, затем в приложении указывается адрес сервера. Перед установкой Android-телефон попросит разрешить установку из неизвестного источника.',
     'apps.soon': 'Приложение для iPhone готовится.',
     'dl.get': 'Скачать', 'dl.version': 'Версия',
 
@@ -1031,7 +1031,7 @@ const STR = {
     'form.done_lead': 'Отправьте это сообщение в Telegram или продиктуйте по телефону — свяжемся в течение рабочего дня.',
     'form.copy': 'Скопировать', 'form.copied': 'Скопировано',
     'form.tg': 'Telegram', 'form.phone_btn': 'Позвонить', 'form.again': 'Заполнить заново',
-    'form.msg_head': 'UstaCRM — заявка на бесплатную пробу',
+    'form.msg_head': 'UstaERP — заявка на бесплатную пробу',
     'form.m_name': 'Имя', 'form.m_phone': 'Телефон', 'form.m_shop': 'Цех',
     'form.m_city': 'Город', 'form.m_size': 'Сотрудников', 'form.m_note': 'Комментарий',
 
@@ -1067,7 +1067,7 @@ const STR = {
     'pain.eyebrow': 'A familiar picture',
     'pain.title': 'The books are in a notebook, the control is in your head',
     'pain.lead': 'While the workshop is small, everything fits in memory. As orders grow, deadlines and stock are the first things to slip.',
-    'pain.col1': 'Today', 'pain.col2': 'With UstaCRM',
+    'pain.col1': 'Today', 'pain.col2': 'With UstaERP',
     'pains': [
       ['Records live in a notebook and in Excel', 'Every order has its own card: client, deadline, materials, stage'],
       ['Orders get lost, deadlines pass', 'A late order flags itself — you see it without asking'],
@@ -1131,7 +1131,7 @@ const STR = {
       ['Windows', 'Desktop app', 'Installed on the computer and opened from the desktop in one click.'],
       ['Android', 'Phone app', 'On the floor: claim a task, upload a photo, complete a stage. If the connection drops, screens you already opened keep their data and a comment you write is sent later.']
     ],
-    'apps.install': 'The apps connect to the UstaCRM server in your own workshop: the system is installed first, then the server address is entered in the app. Before installing, an Android phone asks you to allow installation from an unknown source.',
+    'apps.install': 'The apps connect to the UstaERP server in your own workshop: the system is installed first, then the server address is entered in the app. Before installing, an Android phone asks you to allow installation from an unknown source.',
     'apps.soon': 'An iPhone app is in preparation.',
     'dl.get': 'Download', 'dl.version': 'Version',
 
@@ -1180,7 +1180,7 @@ const STR = {
     'form.done_lead': 'Send this message on Telegram or read it out by phone — we answer within one working day.',
     'form.copy': 'Copy', 'form.copied': 'Copied',
     'form.tg': 'Telegram', 'form.phone_btn': 'Call', 'form.again': 'Start over',
-    'form.msg_head': 'UstaCRM — free trial request',
+    'form.msg_head': 'UstaERP — free trial request',
     'form.m_name': 'Name', 'form.m_phone': 'Phone', 'form.m_shop': 'Workshop',
     'form.m_city': 'City', 'form.m_size': 'Staff', 'form.m_note': 'Note',
 
@@ -1199,13 +1199,13 @@ const STR = {
 const BUILDS =
   {
       "android": {
-          "file": "dist/ustacrm.apk",
+          "file": "dist/ustaerp.apk",
           "version": "0.1",
           "size": 10.8,
           "built": "23.08.2026"
       },
       "windows": {
-          "file": "dist/UstaCRM.exe",
+          "file": "dist/UstaERP.exe",
           "version": "1.0.0.0",
           "size": 1.2,
           "built": "22.08.2026"
@@ -1239,7 +1239,7 @@ function render(lang) {
   });
 
   document.documentElement.lang = lang;
-  document.title = 'UstaCRM';
+  document.title = 'UstaERP';
   const desc = document.querySelector('meta[name="description"]');
   if (desc) desc.content = t['meta.desc'];
 
@@ -1254,7 +1254,7 @@ function render(lang) {
   });
   markStage();
 
-  // today / with UstaCRM
+  // today / with UstaERP
   const pains = document.getElementById('pains');
   pains.textContent = '';
   t['pains'].forEach(([oldWay, newWay]) => {
@@ -1407,7 +1407,7 @@ if (!still.matches) {
 }
 
 /* ---- language choice ---- */
-const LANG_KEY = 'ustacrm_site_lang';
+const LANG_KEY = 'ustaerp_site_lang';
 function pickLang() {
   const saved = localStorage.getItem(LANG_KEY);
   if (LANGS.includes(saved)) return saved;

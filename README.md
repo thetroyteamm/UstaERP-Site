@@ -1,10 +1,10 @@
-# UstaCRM — customer website
+# UstaERP — customer website
 
-The public site for UstaCRM, a workflow CRM for custom furniture workshops. It is written for
+The public site for UstaERP, a workflow CRM for custom furniture workshops. It is written for
 an owner deciding whether to buy: what the product does, what it costs, and a form that turns a
 visitor into a phone call. There is no login here, and the page never talks to the CRM itself.
 
-**Live at <https://thetroyteamm.github.io/UstaCRM-Site/>**
+**Live at <https://thetroyteamm.github.io/UstaERP-Site/>**
 
 **One page: `index.html`.** No build step, no framework, no backend — HTML, CSS and JavaScript
 in a single document, in Uzbek, Russian and English. `dist/` holds the builds a visitor can
@@ -42,7 +42,7 @@ the tag, leave it empty (`''`) and it is an ordinary card.
 button. Search for `998905012611`.
 
 **The Telegram button** points at a `t.me` link built from that number, which only resolves if
-the number is reachable that way. A public username — `https://t.me/ustacrm`, say — is more
+the number is reachable that way. A public username — `https://t.me/ustaerp`, say — is more
 reliable and reads better to a customer.
 
 **Copy** — all of it lives in `STR`, one block per language (`uz`, `ru`, `en`). The markup
@@ -61,7 +61,7 @@ version, the size and the date it was built, so a visitor can tell whether they 
 that one. There is nothing to download for the browser — that is rather the point of it.
 
 **`#yuklab` links straight to them.** Send someone
-<https://thetroyteamm.github.io/UstaCRM-Site/#yuklab> and the page opens at the downloads
+<https://thetroyteamm.github.io/UstaERP-Site/#yuklab> and the page opens at the downloads
 instead of the top. The script re-applies that jump once it has built the page, because the
 browser acts on the `#` before the sections exist and would otherwise land in the wrong place.
 
@@ -78,10 +78,10 @@ figure typed in by hand is a figure that will be wrong after the next build. Com
 `index.html` and `dist/` together.
 
 The script expects the CRM project to sit beside this one. If it lives somewhere else, point
-`USTACRM_BUILDS` at the folder holding the published builds:
+`USTAERP_BUILDS` at the folder holding the published builds:
 
 ```bash
-USTACRM_BUILDS=/path/to/prototype/dist php tools/publish_builds.php
+USTAERP_BUILDS=/path/to/prototype/dist php tools/publish_builds.php
 ```
 
 If a build is missing from the source folder, the script writes `null` for it and its button
