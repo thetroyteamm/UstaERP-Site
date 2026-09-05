@@ -11,3 +11,8 @@
 # never corrupt an 11MB APK into one that will not install.
 *.apk binary
 *.exe binary
+
+# Same reasoning for the hero slideshow pictures in media/hero/: pictures, never text.
+*.jpg binary
+*.jpeg binary
+*.png binary
