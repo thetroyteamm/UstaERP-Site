@@ -1,0 +1,255 @@
+<meta charset="utf-8">
+<title>UstaERP</title>
+<meta name="description" content="UstaERP — mebel ustaxonalari uchun CRM. Sayt ishlab chiqish jarayonida.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:title" content="UstaERP — ustaxonangiz kaftingizda">
+<meta property="og:description" content="Sayt ishlab chiqish jarayonida.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ustaxona.com/">
+
+<!-- Stricter than the main page can be, and for one reason: there is no script here at all.
+     default-src 'none' therefore blocks scripts outright rather than having to allow
+     'unsafe-inline' for a document that carries its own. Nothing loads but the typefaces. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23C75B22' d='M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=IBM+Plex+Mono:wght@500&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
+
+<!--
+  UstaERP — holding page.
+
+  The site while the site is being built. Four things and nothing else: the mark, the name,
+  the promise the product is sold on, and an honest word about the state of the page.
+
+  It is not a stripped copy of index.html but the same design spoken quietly: identical
+  tokens, identical typefaces, the same walnut ground with the same two lamps, the same
+  setting-out grid and the same pressed-paper grain. Somebody who sees this page and the
+  finished one a month apart should recognise the second from the first.
+
+  The walnut is deliberately not a theme colour — it is a surface, and it is the same value
+  in light and dark, exactly as in index.html. So this page needs no dark variant: it is
+  already the dark one, and `color-scheme: dark` only tells the browser to match its own
+  furniture to it.
+
+  Three languages, and still no script. The switch is :target — each language is a block
+  with an id, the links are ordinary anchors, and CSS decides which block is shown. That
+  keeps `default-src 'none'` in the policy above, which is worth more on a page that will
+  sit at the apex of the domain for weeks than the convenience of a click handler.
+
+  The default — no hash in the address — has to be Uzbek, and that is the one state :target
+  cannot select for. The trick is DOM order: the Uzbek block is written LAST and shown by
+  default, and either of the two before it, once targeted, hides it with a sibling
+  combinator. Nobody sees the order, because only one block is ever visible.
+
+  Reordering them, or moving the Uzbek block up the document, breaks the default state.
+
+  No script, and no images beyond the mark inlined below. See the CSP above.
+-->
+
+<style>
+:root{
+  color-scheme:dark;
+
+  --brand:#c75b22;
+  --dark:#171310;
+  --on-dark:#f7f2ec;
+  --on-dark-soft:#b5a99c;
+  --on-dark-accent:#e87c3f;
+  --dark-line:#3a3029;
+
+  --font-display:'Bitter', Georgia, 'Times New Roman', serif;
+  --font-mono:'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --font-brand:'Source Serif 4', Georgia, 'Times New Roman', serif;
+
+  --blueprint:rgba(246,241,236,.05);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  min-height:100vh;
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:32px 22px;
+  background:var(--dark);
+  color:var(--on-dark);
+  font-family:var(--font-mono);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* The two lamps from the hero: the warm one falls from the top right, the workshop green
+   warms the opposite corner and never rises far enough to be noticed on its own. */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none;
+  background:
+    radial-gradient(820px 460px at 78% 2%, rgba(232,124,63,.20), transparent 62%),
+    radial-gradient(700px 500px at 4% 96%, rgba(59,102,86,.15), transparent 66%);
+}
+/* The setting-out lines a board is marked with before it is cut, masked so they fade out
+   before they can turn into decoration. Its colour carries its own alpha, so this layer is
+   drawn at full strength — see .grain below for why the two are not stacked together. */
+.grid{
+  position:fixed; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(var(--blueprint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blueprint) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(1100px 760px at 50% 30%, #000, transparent 82%);
+  -webkit-mask-image:radial-gradient(1100px 760px at 50% 30%, #000, transparent 82%);
+}
+/* The pressed-paper grain, over everything and at a few percent, so that no fill on the page
+   reads as perfectly flat. Its own layer because it needs an opacity two orders away from
+   the grid's, and one element cannot hold both. */
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none;
+  background-image:var(--grain);
+  opacity:.06;
+}
+
+/* --- the language switch --- */
+/* Same pill as the finished site's header. It sits under the content rather than over it:
+   on a page whose whole job is one sentence, the control that changes the sentence should
+   not be the first thing read. */
+main{display:flex; flex-direction:column; align-items:center;}
+.langs{
+  position:relative; z-index:1;
+  display:flex; gap:2px; padding:3px; margin:36px auto 0;
+  width:max-content; border-radius:999px;
+  background:rgba(0,0,0,.28); border:1px solid var(--dark-line);
+}
+.langs a{
+  font-family:var(--font-mono); font-size:11.5px; font-weight:500; letter-spacing:.06em;
+  padding:5px 12px; border-radius:999px; text-decoration:none;
+  color:var(--on-dark-soft); transition:color .18s ease, background .18s ease;
+}
+.langs a:hover{color:var(--on-dark);}
+.langs a:focus-visible{outline:2px solid var(--on-dark-accent); outline-offset:2px;}
+
+/* Which language is on. Read the note at the top of the file before changing any of this,
+   and in particular before moving #uz: it is last on purpose. */
+.lang{display:none;}
+#uz{display:block;}
+.lang:target{display:block;}
+.lang:target ~ #uz{display:none;}
+
+/* The pill marks the language actually showing, which for the default is Uzbek. */
+#ru:target ~ .langs a[href="#ru"],
+#en:target ~ .langs a[href="#en"]{background:rgba(246,241,236,.1); color:var(--on-dark);}
+.langs a[href="#uz"]{background:rgba(246,241,236,.1); color:var(--on-dark);}
+#ru:target ~ .langs a[href="#uz"],
+#en:target ~ .langs a[href="#uz"]{background:transparent; color:var(--on-dark-soft);}
+
+.holding{position:relative; z-index:1; text-align:center; max-width:34em;}
+
+/* The mark and the name, locked up the way the header does it, at the size a workshop
+   paints its own sign. */
+.lockup{
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  margin-bottom:34px;
+}
+.lockup svg{width:clamp(32px, 4.4vw, 42px); height:auto; display:block;}
+.lockup span{
+  font-family:var(--font-brand);
+  font-size:clamp(27px, 3.9vw, 38px);
+  letter-spacing:-.005em;
+  line-height:1;
+}
+
+h1{
+  font-family:var(--font-display); font-weight:700;
+  font-size:clamp(33px, 6.2vw, 62px); line-height:1.06; letter-spacing:-.022em;
+  margin:0; text-wrap:balance;
+}
+
+/* The status line reads as an instrument rather than an apology: a lit lamp and a plain
+   statement of fact. The same tally lamp the finished page opens with. */
+.status{
+  display:inline-flex; align-items:center; gap:10px;
+  margin:30px 0 0; padding:9px 17px 9px 14px;
+  font-size:clamp(11.5px, 1.5vw, 13px); font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--on-dark-soft);
+  border:1px solid var(--dark-line); border-radius:999px;
+}
+.status i{
+  width:7px; height:7px; flex-shrink:0; border-radius:50%;
+  background:var(--on-dark-accent);
+  box-shadow:0 0 0 0 rgba(232,124,63,.55);
+  animation:tally 2.4s ease-out infinite;
+}
+@keyframes tally{
+  0%{box-shadow:0 0 0 0 rgba(232,124,63,.55);}
+  70%{box-shadow:0 0 0 9px rgba(232,124,63,0);}
+  100%{box-shadow:0 0 0 0 rgba(232,124,63,0);}
+}
+
+/* The credit, set as quietly as a maker's plate on the back of a cabinet: the label recedes
+   and only the name is at full strength. It lives inside each language block because the
+   label is translated, so it lands above the switcher rather than below it. */
+.founder{
+  margin:26px 0 0;
+  font-size:12.5px; letter-spacing:.04em;
+  color:var(--on-dark-soft);
+}
+.founder b{font-weight:500; color:var(--on-dark);}
+
+@media (prefers-reduced-motion: reduce){
+  .status i{animation:none;}
+}
+</style>
+
+<div class="grid" aria-hidden="true"></div>
+
+<main>
+  <section class="lang holding" id="ru" lang="ru">
+    <div class="lockup">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--brand)" d="M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z"/></svg>
+      <span>UstaERP</span>
+    </div>
+
+    <h1>Ваш цех — на ладони</h1>
+
+    <p class="status"><i aria-hidden="true"></i>Сайт в разработке</p>
+
+    <p class="founder">Основатель: <b>MACRO WOOD</b></p>
+  </section>
+
+  <section class="lang holding" id="en" lang="en">
+    <div class="lockup">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--brand)" d="M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z"/></svg>
+      <span>UstaERP</span>
+    </div>
+
+    <h1>Your workshop in your hand</h1>
+
+    <p class="status"><i aria-hidden="true"></i>The site is under development</p>
+
+    <p class="founder">Founder: <b>MACRO WOOD</b></p>
+  </section>
+
+  <section class="lang holding" id="uz" lang="uz">
+    <div class="lockup">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--brand)" d="M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z"/></svg>
+      <span>UstaERP</span>
+    </div>
+
+    <h1>Ustaxonangiz kaftingizda</h1>
+
+    <p class="status"><i aria-hidden="true"></i>Sayt ishlab chiqish jarayonida</p>
+
+    <p class="founder">Asoschi: <b>MACRO WOOD</b></p>
+  </section>
+
+  <nav class="langs" aria-label="Til / Язык / Language">
+    <a href="#uz" hreflang="uz">UZ</a>
+    <a href="#ru" hreflang="ru">RU</a>
+    <a href="#en" hreflang="en">EN</a>
+  </nav>
+</main>
