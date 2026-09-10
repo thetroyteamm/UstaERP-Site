@@ -1,10 +1,14 @@
 <meta charset="utf-8">
 <title>UstaERP</title>
-<meta name="description" content="Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, ishbay oylik va muddatlar — bitta tizimda.">
+<meta name="description" content="Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, oylik va muddatlar — bitta tizimda.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://telegram.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com https://oauth.telegram.org; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta property="og:title" content="UstaERP — ustaxonangiz kaftingizda">
 <meta property="og:description" content="Mebel ustaxonalari uchun CRM: buyurtma, ombor, ishchilar va muddatlar bitta tizimda.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://ustaxona.com/">
+<link rel="canonical" href="https://ustaxona.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23C75B22' d='M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z'/%3E%3C/svg%3E" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -756,6 +760,154 @@ footer a:hover{border-bottom-color:var(--accent);}
   margin:44px auto -.16em; max-width:var(--wrap); padding:0 22px; text-align:center;
 }
 
+/* ---------- signing in ---------- */
+/* A screen, not a second page: this site is one file, and a separate login.html would mean a
+   second copy of every token above it. So it is a dialog - linkable at #kirish, dismissed
+   with Esc, and out of the reading order entirely while it is shut.
+
+   The split is the app's own login screen (prototype/login.html): brand on the walnut, the
+   form on paper. The first UstaERP screen a customer meets is then the one they keep meeting.
+
+   It sits under the grain (z-index 55 against the overlay's 60) so the texture carries across
+   it, and over the header (50) so nothing of the page shows through the top. */
+.auth{position:fixed; inset:0; z-index:55; display:none;}
+.auth.on{display:block;}
+.auth-veil{position:absolute; inset:0; background:rgba(12,8,6,.66); backdrop-filter:blur(7px) saturate(1.2);}
+.auth-scroll{
+  position:relative; height:100%; overflow:auto;
+  display:flex; align-items:flex-start; justify-content:center; padding:22px;
+}
+/* Centred by margin rather than by align-items: a flex item centred the other way has its
+   overflowing top clipped out of reach the moment the card is taller than the window, which
+   is every phone in landscape. */
+.auth-card{margin:auto;}
+.auth-card{
+  position:relative; width:min(940px, 100%);
+  display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1fr);
+  /* rest in .auth-card above and in the narrow-window rules at the end */
+  background:var(--panel); border-radius:var(--radius-lg); overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+.auth.on .auth-card{animation:auth-in .34s cubic-bezier(.2,.9,.3,1) both;}
+@keyframes auth-in{from{opacity:0; transform:translateY(14px) scale(.985);} to{opacity:1; transform:none;}}
+
+/* --- the walnut half --- */
+.auth-side{
+  position:relative; background:var(--dark); color:var(--on-dark);
+  padding:36px 32px; display:flex; flex-direction:column; gap:20px;
+}
+.auth-side::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(520px 340px at 88% -6%, rgba(232,124,63,.22), transparent 64%),
+             radial-gradient(420px 320px at 0% 104%, rgba(59,102,86,.18), transparent 68%);
+}
+.auth-side::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:linear-gradient(var(--blueprint) 1px, transparent 1px),
+                   linear-gradient(90deg, var(--blueprint) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(460px 420px at 40% 0%, #000, transparent 78%);
+  -webkit-mask-image:radial-gradient(460px 420px at 40% 0%, #000, transparent 78%);
+}
+.auth-side > *{position:relative; z-index:1;}
+.auth-brand{display:flex; align-items:center; gap:10px;}
+.auth-brand svg{width:26px; height:26px; display:block;}
+.auth-brand span{font-family:var(--font-brand); font-size:22px; color:var(--on-dark);}
+.auth-pitch{font-size:15.5px; color:var(--on-dark-soft);}
+/* The pipeline again, stood on end. It is the product's one idea, so it is also the motif. */
+.auth-steps{list-style:none; margin:auto 0 0; padding:0; position:relative;}
+.auth-steps::before{
+  content:""; position:absolute; left:9px; top:10px; bottom:10px; width:1px;
+  background:linear-gradient(var(--on-dark-accent), var(--dark-line));
+}
+.auth-steps li{
+  position:relative; padding:0 0 0 30px; margin:0 0 12px;
+  font-size:14px; color:var(--on-dark-soft);
+}
+.auth-steps li:last-child{margin-bottom:0;}
+.auth-steps li::before{
+  content:""; position:absolute; left:5px; top:8px; width:9px; height:9px; border-radius:50%;
+  background:var(--dark); box-shadow:0 0 0 1.5px var(--on-dark-accent) inset, 0 0 0 3px var(--dark);
+}
+.auth-note{
+  font-size:12.5px; line-height:1.55; color:var(--on-dark-soft);
+  padding-top:16px; border-top:1px solid var(--dark-line);
+}
+
+/* --- the paper half --- */
+.auth-panel{padding:30px 34px 32px; display:flex; flex-direction:column; min-width:0;}
+.auth-top{display:flex; align-items:center; gap:12px;}
+.auth-tabs{display:flex; gap:2px; padding:3px; background:var(--paper-sunk); border-radius:999px;}
+.auth-tabs button{
+  font-family:var(--font-body); font-size:13.5px; font-weight:600; white-space:nowrap;
+  padding:7px 15px; border:0; border-radius:999px; background:transparent; color:var(--ink-soft);
+  cursor:pointer; transition:color .18s ease, background .18s ease;
+}
+.auth-tabs button[aria-selected="true"]{background:var(--panel); color:var(--ink); box-shadow:var(--shadow-sm);}
+.auth-x{
+  margin-inline-start:auto; width:34px; height:34px; flex-shrink:0;
+  display:grid; place-items:center; font-size:19px; line-height:1;
+  border:1px solid var(--line); border-radius:50%; background:transparent;
+  color:var(--ink-soft); cursor:pointer;
+  transition:border-color .16s ease, color .16s ease, background .16s ease;
+}
+.auth-x:hover{border-color:var(--ink-soft); color:var(--ink); background:var(--paper-sunk);}
+.auth-panel h2{font-size:clamp(21px, 2.4vw, 26px); margin:22px 0 7px;}
+.auth-sub{font-size:14.5px; color:var(--ink-soft);}
+
+/* Providers. One column: these are alternatives to each other, not a toolbar, and a row of
+   equal squares makes somebody choose an icon rather than an account they have. */
+.auth-provs{display:flex; flex-direction:column; gap:9px; margin-top:22px;}
+.prov{
+  position:relative; display:flex; align-items:center; gap:11px; width:100%;
+  font-family:var(--font-body); font-size:15px; font-weight:600; color:var(--ink);
+  padding:12px 15px; border:1px solid var(--line-strong); border-radius:var(--radius);
+  background:var(--panel); cursor:pointer; text-align:start;
+  transition:border-color .16s ease, background .16s ease, transform .16s ease, box-shadow .16s ease;
+}
+.prov:hover:not([disabled]):not([aria-disabled="true"]){border-color:var(--ink-soft); transform:translateY(-1px); box-shadow:var(--shadow-sm);}
+.prov:active:not([disabled]):not([aria-disabled="true"]){transform:translateY(0);}
+.prov svg{width:20px; height:20px; flex-shrink:0;}
+/* Greyed but still clickable, and still reachable by keyboard: a button that is going to
+   be there later should say when, and a truly disabled one cannot say anything at all.
+   The markup ships with the real `disabled` so it is inert if this script never runs. */
+.prov[disabled], .prov[aria-disabled="true"]{opacity:.62;}
+.prov[aria-disabled="true"]{cursor:default;}
+/* Something planned is shown greyed with a flag rather than hidden - the same way the pricing
+   table marks a feature that is coming. Promising it in a live button would be a lie. */
+.prov .soon{
+  margin-inline-start:auto; font-family:var(--font-mono); font-size:9.5px; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint);
+  border:1px solid var(--line); border-radius:999px; padding:2px 7px;
+}
+.auth-or{
+  display:flex; align-items:center; gap:12px; margin:20px 0 4px;
+  font-family:var(--font-mono); font-size:10.5px; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint);
+}
+.auth-or::before, .auth-or::after{content:""; height:1px; background:var(--line); flex:1;}
+
+/* The one button in the panel is the register tab's, and it spans the column. */
+.auth-panel .btn-primary{width:100%; margin-top:16px; padding:13px;}
+.auth-msg{
+  margin-top:14px; padding:11px 13px; border-radius:var(--radius);
+  font-size:13.5px; line-height:1.5;
+  background:var(--accent-soft); color:var(--ink);
+  box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent) inset;
+}
+.auth-msg[hidden]{display:none;}
+.auth-fine{margin-top:auto; padding-top:22px; font-size:12.5px; line-height:1.6; color:var(--ink-faint);}
+.auth-fine a{color:var(--ink-soft);}
+.auth-pane[hidden]{display:none;}
+
+/* The header's own login control. Unlike the trial button it survives on a phone: somebody
+   who already pays is the one person guaranteed to come back on the handset. */
+.btn-login{
+  background:transparent; color:var(--ink); border-color:var(--line-strong);
+  padding:8px 15px; font-size:14px;
+}
+.btn-login:hover{border-color:var(--ink-soft); background:var(--paper-sunk); transform:translateY(-1px);}
+
 /* ---------- entrances ---------- */
 /* Applied by script and only where motion is welcome, so a page with no JavaScript, or one
    asked to hold still, shows everything from the start. */
@@ -775,8 +927,8 @@ footer a:hover{border-bottom-color:var(--accent);}
   .step:first-child, .road-item.now{border-top-color:var(--accent);}
   .plan.best{transform:none;}
   .plan.best:hover{transform:translateY(-3px);}
-  /* The nav does not fit on a phone, but the download link is the one item a phone visitor
-     came for — keep that one and drop the rest rather than hiding the whole bar. */
+  /* The nav does not fit in a tablet's header, so it keeps the one link most visitors are
+     after and drops the rest rather than hiding the whole bar. */
   .top nav a:not(.nav-dl){display:none;}
 }
 @media (max-width: 620px){
@@ -794,7 +946,12 @@ footer a:hover{border-bottom-color:var(--accent);}
   .fields{grid-template-columns:minmax(0,1fr);}
   .top-in{height:58px; gap:10px;}
   .top.stuck .top-in{height:52px;}
+  /* On a phone the bar is down to what it cannot do without: the mark, the language, and
+     the way back in. The trial button has the whole closing section to itself further down,
+     and the platforms link went with the downloads — there is nothing to fetch yet. */
+  .top nav{display:none;}
   .top .btn{display:none;}
+  .top .btn-login{display:inline-flex; padding:7px 13px;}
   .sec-head{margin-bottom:34px;}
   form{padding:22px;}
   .rail-track{
@@ -802,6 +959,22 @@ footer a:hover{border-bottom-color:var(--accent);}
     -webkit-mask-image:linear-gradient(90deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
   }
 }
+/* The sign-in screen stacks: the brand half becomes a header for the form half rather than
+   a column beside it, and the pipeline lies down. */
+@media (max-width: 780px){
+  .auth-scroll{padding:14px;}
+  .auth-card{grid-template-columns:minmax(0,1fr);}
+  .auth-side{padding:24px 22px; gap:14px;}
+  .auth-side::after{display:none;}
+  .auth-steps{display:flex; flex-wrap:wrap; gap:4px 18px; margin:0;}
+  .auth-steps::before{display:none;}
+  .auth-steps li{margin:0; padding-inline-start:15px; font-size:13px;}
+  .auth-steps li::before{left:0; top:7px; width:7px; height:7px; box-shadow:0 0 0 1.5px var(--on-dark-accent) inset;}
+  .auth-note{display:none;}
+  .auth-panel{padding:22px 22px 24px;}
+  .auth-panel h2{margin-top:18px;}
+}
+
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   .chips{scroll-behavior:auto;}
@@ -827,6 +1000,7 @@ footer a:hover{border-bottom-color:var(--accent);}
       <button type="button" data-lang="ru" aria-pressed="false">RU</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
+    <button type="button" class="btn btn-login" data-auth-open data-i18n="nav.login">Kirish</button>
     <a class="btn btn-primary" href="#aloqa" data-i18n="nav.cta">Bepul sinash</a>
   </div>
   <div class="progress" aria-hidden="true"><span></span></div>
@@ -967,6 +1141,7 @@ footer a:hover{border-bottom-color:var(--accent);}
       <p data-i18n="apps.lead">Tizim ustaxonaning o'z kompyuterida turadi. Qolganlari shu tarmoq orqali kiradi: Wi-Fi yoki telefon hotspoti yetarli.</p>
     </div>
     <div class="cards" id="apps"></div>
+    <p class="soon-note" data-i18n="apps.pending">Ilovalar tayyorlanmoqda. Tizim ishga tushgach yuklab olish shu yerda ochiladi.</p>
     <p class="soon-note" data-i18n="apps.install">Ilovalar ustaxonangizdagi UstaERP serveriga ulanadi: avval tizim o'rnatiladi, keyin ilovada server manzili ko'rsatiladi. Android telefon o'rnatishdan oldin «noma'lum manbadan o'rnatish»ga ruxsat so'raydi.</p>
     <p class="soon-note" data-i18n="apps.soon">iPhone uchun ilova tayyorlanmoqda.</p>
   </div>
@@ -1095,8 +1270,8 @@ footer a:hover{border-bottom-color:var(--accent);}
       </div>
       <div>
         <b data-i18n="foot.team">Jamoa</b>
-        <span data-i18n="foot.founder">Asoschi: Jo'rabek Kamolov</span>
-        <span data-i18n="foot.dev">Dasturchi: Troy</span>
+        <span data-i18n="foot.founder">Asoschi: MACRO WOOD</span>
+        <span data-i18n="foot.dev">Dasturchi: Jamshid Namozov</span>
       </div>
       <div>
         <b data-i18n="foot.year">Yil</b>
@@ -1107,6 +1282,103 @@ footer a:hover{border-bottom-color:var(--accent);}
   <div class="foot-mark" aria-hidden="true">UstaERP</div>
 </footer>
 
+<!-- ===== Signing in ====================================================================
+     Reached from the header or by opening the page at #kirish. The stylesheet says why this
+     is a dialog and not a second document; AUTH in the script below says what each route
+     does and which one line switches them on.
+
+     No password is ever typed here, by design. A workshop is identified by its own address
+     (usta1.ustaxona.com) and the password belongs to that server, which is the only machine
+     that can check it. A static marketing page collecting passwords is how phishing looks,
+     so the panel says outright that this page will never ask. -->
+<div class="auth" id="auth" role="dialog" aria-modal="true" data-i18n-aria="auth.dialog">
+  <div class="auth-veil" data-auth-close></div>
+  <div class="auth-scroll">
+    <div class="auth-card">
+
+      <section class="auth-side">
+        <div class="auth-brand">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--brand)" d="M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z"/></svg>
+          <span>UstaERP</span>
+        </div>
+        <p class="auth-pitch" data-i18n="auth.pitch">Har bir buyurtma — o'lchovdan o'rnatishgacha.</p>
+        <ul class="auth-steps">
+          <li data-i18n="auth.s1">O'lchov</li>
+          <li data-i18n="auth.s2">Loyiha</li>
+          <li data-i18n="auth.s3">Ishlab chiqarish</li>
+          <li data-i18n="auth.s4">Topshirish</li>
+        </ul>
+        <p class="auth-note" data-i18n="auth.side_note">Hisobni ustaxona rahbari ochadi.</p>
+      </section>
+
+      <section class="auth-panel">
+        <div class="auth-top">
+          <div class="auth-tabs" role="tablist" data-i18n-aria="auth.tabs">
+            <button type="button" role="tab" id="auth-tab-in" aria-controls="auth-in"
+                    aria-selected="true" data-i18n="auth.tab_in">Kirish</button>
+            <button type="button" role="tab" id="auth-tab-up" aria-controls="auth-up"
+                    aria-selected="false" data-i18n="auth.tab_up">Ro'yxatdan o'tish</button>
+          </div>
+          <button type="button" class="auth-x" data-auth-close data-i18n-aria="auth.close">&#215;</button>
+        </div>
+
+        <div class="auth-pane" id="auth-in" role="tabpanel" aria-labelledby="auth-tab-in">
+          <h2 data-i18n="auth.in_title">Ustaxonangizga kiring</h2>
+          <p class="auth-sub" data-i18n="auth.in_sub">Rahbaringiz ochgan hisob bilan.</p>
+
+          <div class="auth-provs">
+            <button type="button" class="prov" data-prov="google" disabled>
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24s.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+              <span data-i18n="auth.google">Google bilan kirish</span>
+              <span class="soon" data-i18n="price.soon">tez orada</span>
+            </button>
+            <button type="button" class="prov" data-prov="telegram" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path fill="#fff" d="M5.42 11.87c3.5-1.52 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.46.14.12.1.15.23.17.33.02.09.04.31.02.48-.18 1.9-.96 6.5-1.36 8.62-.17.9-.5 1.2-.82 1.23-.7.06-1.23-.46-1.9-.9-1.06-.7-1.66-1.13-2.69-1.81-1.19-.79-.42-1.22.26-1.93.18-.19 3.24-2.97 3.3-3.22.01-.03.01-.15-.06-.21-.07-.06-.17-.04-.25-.02-.11.02-1.79 1.14-5.05 3.35-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.86-.44-.75-.24-1.35-.37-1.3-.79.03-.22.32-.44.87-.67z"/></svg>
+              <span data-i18n="auth.telegram">Telegram bilan kirish</span>
+              <span class="soon" data-i18n="price.soon">tez orada</span>
+            </button>
+          </div>
+
+          <p class="auth-msg" hidden></p>
+          <p class="auth-fine" data-i18n="auth.fine_in">Parolingiz faqat ustaxonangiz serverida
+             kiritiladi. UstaERP uni hech qachon bu sahifada so'ramaydi.</p>
+        </div>
+
+        <div class="auth-pane" id="auth-up" role="tabpanel" aria-labelledby="auth-tab-up" hidden>
+          <h2 data-i18n="auth.up_title">Ustaxona ochish</h2>
+          <p class="auth-sub" data-i18n="auth.up_sub">Ro'yxatdan o'tish tez orada ochiladi.</p>
+
+          <div class="auth-provs">
+            <button type="button" class="prov" data-prov="google-up" disabled>
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24s.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+              <span data-i18n="auth.google_up">Google bilan ro'yxatdan o'tish</span>
+              <span class="soon" data-i18n="price.soon">tez orada</span>
+            </button>
+            <button type="button" class="prov" data-prov="telegram-up" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path fill="#fff" d="M5.42 11.87c3.5-1.52 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.46.14.12.1.15.23.17.33.02.09.04.31.02.48-.18 1.9-.96 6.5-1.36 8.62-.17.9-.5 1.2-.82 1.23-.7.06-1.23-.46-1.9-.9-1.06-.7-1.66-1.13-2.69-1.81-1.19-.79-.42-1.22.26-1.93.18-.19 3.24-2.97 3.3-3.22.01-.03.01-.15-.06-.21-.07-.06-.17-.04-.25-.02-.11.02-1.79 1.14-5.05 3.35-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.86-.44-.75-.24-1.35-.37-1.3-.79.03-.22.32-.44.87-.67z"/></svg>
+              <span data-i18n="auth.telegram_up">Telegram bilan ro'yxatdan o'tish</span>
+              <span class="soon" data-i18n="price.soon">tez orada</span>
+            </button>
+          </div>
+
+          <div class="auth-or" data-i18n="auth.or">yoki</div>
+
+          <p class="auth-sub" data-i18n="auth.up_ask">Hozircha so'rov qoldiring — biz o'zimiz
+             bog'lanamiz va ustaxonangizni ochib beramiz.</p>
+          <button type="button" class="btn btn-primary" id="auth-to-form"
+                  data-i18n="auth.up_cta">So'rov qoldirish</button>
+
+          <p class="auth-msg" hidden></p>
+
+          <p class="auth-fine" data-i18n="auth.fine_up">Karta so'ralmaydi. Ma'lumotingiz uchinchi
+             tomonga berilmaydi.</p>
+        </div>
+
+      </section>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ============================================================
    Copy for all three languages. The product ships uz/ru/en, so the site does too;
@@ -1115,8 +1387,8 @@ footer a:hover{border-bottom-color:var(--accent);}
    ============================================================ */
 const STR = {
   uz: {
-    'meta.desc': "Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, ishbay oylik va muddatlar — bitta tizimda.",
-    'nav.features': 'Imkoniyatlar', 'nav.how': 'Qanday ishlaydi', 'nav.download': 'Yuklab olish', 'nav.pricing': 'Narxlar',
+    'meta.desc': "Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, oylik va muddatlar — bitta tizimda.",
+    'nav.features': 'Imkoniyatlar', 'nav.how': 'Qanday ishlaydi', 'nav.download': 'Ilovalar', 'nav.pricing': 'Narxlar',
     'nav.contact': 'Aloqa', 'nav.cta': 'Bepul sinash',
 
     'hero.eyebrow': 'Mebel ustaxonalari uchun CRM',
@@ -1144,10 +1416,10 @@ const STR = {
     'pain.col1': 'Hozir', 'pain.col2': 'UstaERP bilan',
     'pains': [
       ["Hisob daftarda va Excelda yuritiladi", "Har bir buyurtma o'z kartasida: mijoz, muddat, material, bosqich"],
-      ["Buyurtma yo'qoladi, muddat o'tib ketadi", "Kechikkan buyurtma o'zi belgilanadi — so'ramasdan ko'rinadi"],
+      ["Vaqt nazorati", "Kechikkan buyurtma o'zi belgilanadi — so'ramasdan ko'rinadi"],
       ["Ombor qoldig'i noaniq — material kutilmaganda tugaydi", "Qoldiq va zaxira ko'rinib turadi, yetmasa buyurtmada darhol aytiladi"],
-      ["Ishchining ish haji va oyligi chalkash", "Bajarilgan har bosqich yoziladi, oylik o'zi hisoblanadi"],
-      ["Mijoz holatni o'zi qo'ng'iroq qilib so'raydi", "«Qaysi bosqichda?» degan savolga bir soniyada javob berasiz"],
+      ["Oyliklar va har bir ish uchun to'lovda muammolar", "Bajarilgan har bosqich yoziladi, oylik o'zi hisoblanadi"],
+      ["Mijoz holatni o'zi qo'ng'iroq qilib so'raydi", "«Qaysi bosqichda?» degan savolga bot avtomatik ravishda javob beradi"],
       ["Rahbar ustaxonada bo'lmasa nazorat yo'q", "Butun ustaxona telefoningizda — qayerda bo'lsangiz ham"]
     ],
 
@@ -1160,7 +1432,7 @@ const STR = {
       ['Ruxsat', "Kim nimani ko'radi", "Usta faqat o'z vazifasini ko'radi. Narx, tannarx va oylik faqat rahbarda. Qaysi rol qaysi bosqichni olishini rahbar belgilaydi."],
       ['Ombor', "Material ish o'rtasida tugamaydi", "Kirim-chiqim, qoldiq va buyurtmaga zaxiralash. Material yetmasa kamomad darhol ko'rinadi; brak va chiqindi ham yozib boriladi."],
       ['Texkarta', 'Bir marta sozlang — keyin bir bosish', "Tez-tez ishlanadigan mahsulotning bosqichlari va materiallari tayyor turadi. Karta keyin o'zgarsa ham, ishdagi buyurtma o'zgarmaydi."],
-      ['Oylik', "Ishbay oylik o'zi hisoblanadi", "Har bosqichning narxi bor; ishchi tugatgani o'ziga yoziladi. Oy oxirida tayyor jadval — kim qancha ish qildi va qancha oldi."],
+      ['Oylik', "Oylik o'zi hisoblanadi", "Har bosqichning narxi bor; ishchi tugatgani o'ziga yoziladi. Oy oxirida tayyor jadval — kim qancha ish qildi va qancha oldi."],
       ['Muddat', 'Ikkita muddat', "Mijozga va'da qilingan sana va har bosqichning ichki muddati alohida yuradi. Bittasi kechiksa, buyurtma sirg'alayotgani darhol ko'rinadi."],
       ['Xabar', 'Yozishma buyurtma ichida', "Har buyurtma ostida chat, @ bilan xodimni chaqirish va o'qilmagan belgisi. Kim nima qilgani voqealar tasmasida turadi."],
       ['Hisobot', 'Ustaxona holati — grafiklarda', "Oyma-oy qabul qilingan va topshirilgan ish, buyurtmalar qiymati, qaysi bosqichda qancha ish navbat turgani."]
@@ -1223,7 +1495,7 @@ const STR = {
     'price.lead': "To'lov ustaxona uchun, xodim boshiga emas. Sinov davrida karta so'ralmaydi.",
     'plans': [
       ['Bepul', '0', 'UZS', '', ['1 foydalanuvchi', 'Buyurtmalar va ombor', 'Bitta ustaxona', 'Asosiy hisobotlar'], [], 'Sinab ko\'rish'],
-      ['Standart', '49 999', 'UZS / oy', "Ko'p tanlanadi", ['5 foydalanuvchigacha', 'Barcha imkoniyatlar', 'Ishbay oylik va hisobotlar', 'Excelga eksport', "Qo'llab-quvvatlash"], ['Mijozga avtomatik xabar'], 'Tanlash'],
+      ['Standart', '49 999', 'UZS / oy', "Ko'p tanlanadi", ['5 foydalanuvchigacha', 'Barcha imkoniyatlar', 'Oylik va hisobotlar', 'Excelga eksport', "Qo'llab-quvvatlash"], ['Mijozga avtomatik xabar'], 'Tanlash'],
       ['Pro', '149 999', 'UZS / oy', '', ['Cheklanmagan foydalanuvchi', 'Kengaytirilgan hisobotlar', 'Ustuvor qo\'llab-quvvatlash'], ['Bir nechta filial'], 'Bog\'lanish']
     ],
     'price.soon': 'tez orada',
@@ -1259,14 +1531,40 @@ const STR = {
     'form.m_name': 'Ism', 'form.m_phone': 'Telefon', 'form.m_shop': 'Ustaxona',
     'form.m_city': 'Shahar', 'form.m_size': 'Xodimlar', 'form.m_note': 'Izoh',
 
+    'nav.login': 'Kirish',
+
+    'auth.dialog': 'UstaERP — kirish',
+    'auth.tabs': "Kirish yoki ro'yxatdan o'tish",
+    'auth.close': 'Yopish',
+    'auth.pitch': "Har bir buyurtma — o'lchovdan o'rnatilgan shkafgacha: kim nima qilyapti, qancha turadi va nima kechikyapti.",
+    'auth.s1': "O'lchov", 'auth.s2': 'Loyiha', 'auth.s3': 'Ishlab chiqarish', 'auth.s4': 'Topshirish',
+    'auth.side_note': "Hisobni ustaxona rahbari ochadi — xodim alohida ro'yxatdan o'tmaydi.",
+    'auth.tab_in': 'Kirish', 'auth.tab_up': "Ro'yxatdan o'tish",
+    'auth.in_title': 'Ustaxonangizga kiring',
+    'auth.in_sub': 'Rahbaringiz ochib bergan hisob bilan.',
+    'auth.google': 'Google bilan kirish',
+    'auth.telegram': 'Telegram bilan kirish',
+    'auth.or': 'yoki',
+    'auth.soon_msg': "Tizim hali ochilmagan. Ishga tushgach shu yerdan kirasiz — hozircha so'rov qoldiring yoki qo'ng'iroq qiling.",
+    'auth.fine_in': "Parol faqat ustaxonangizning o'z serverida kiritiladi. UstaERP uni hech qachon bu sahifada so'ramaydi.",
+    'auth.up_title': 'Ustaxona ochish',
+    'auth.up_sub': "Ro'yxatdan o'tish tez orada ochiladi.",
+    'auth.google_up': "Google bilan ro'yxatdan o'tish",
+    'auth.telegram_up': "Telegram bilan ro'yxatdan o'tish",
+    'auth.up_ask': "Hozircha so'rov qoldiring — biz bog'lanamiz va ustaxonangizni o'zimiz ochib beramiz.",
+    'auth.up_cta': "So'rov qoldirish",
+    'auth.fine_up': "Karta so'ralmaydi. Ma'lumotingiz uchinchi tomonga berilmaydi.",
+
+    'apps.pending': "Ilovalar tayyorlanmoqda. Tizim ishga tushgach yuklab olish shu yerda ochiladi.",
+
     'foot.tag': 'Mebel ustaxonalari uchun ishlab chiqarish CRM tizimi.',
     'foot.contact': 'Aloqa', 'foot.team': 'Jamoa', 'foot.year': 'Yil',
-    'foot.founder': "Asoschi: Jo'rabek Kamolov", 'foot.dev': 'Dasturchi: Troy'
+    'foot.founder': 'Asoschi: MACRO WOOD', 'foot.dev': 'Dasturchi: Jamshid Namozov'
   },
 
   ru: {
-    'meta.desc': 'CRM для мебельных цехов: заказы, 17 этапов производства, склад, сдельная зарплата и сроки — в одной системе.',
-    'nav.features': 'Возможности', 'nav.how': 'Как работает', 'nav.download': 'Скачать', 'nav.pricing': 'Тарифы',
+    'meta.desc': 'CRM для мебельных цехов: заказы, 17 этапов производства, склад, зарплата и сроки — в одной системе.',
+    'nav.features': 'Возможности', 'nav.how': 'Как работает', 'nav.download': 'Приложения', 'nav.pricing': 'Тарифы',
     'nav.contact': 'Контакты', 'nav.cta': 'Попробовать',
 
     'hero.eyebrow': 'CRM для мебельных цехов',
@@ -1294,10 +1592,10 @@ const STR = {
     'pain.col1': 'Сейчас', 'pain.col2': 'С UstaERP',
     'pains': [
       ['Учёт ведётся в тетради и в Excel', 'У каждого заказа своя карточка: клиент, срок, материалы, этап'],
-      ['Заказ теряется, срок проходит', 'Просроченный заказ отмечается сам — видно без напоминаний'],
+      ['Контроль времени', 'Просроченный заказ отмечается сам — видно без напоминаний'],
       ['Остатки неточные — материал кончается внезапно', 'Остаток и резерв видны, нехватка по заказу показывается сразу'],
-      ['Объём работ и зарплата работника запутаны', 'Каждый завершённый этап записывается, зарплата считается сама'],
-      ['Клиент сам звонит и спрашивает статус', 'На вопрос «на каком этапе?» отвечаете за секунду'],
+      ['Проблемы с зарплатой и оплатой за каждую работу', 'Каждый завершённый этап записывается, зарплата считается сама'],
+      ['Клиент сам звонит и спрашивает статус', 'На вопрос «на каком этапе?» бот отвечает автоматически'],
       ['Нет руководителя в цехе — нет контроля', 'Весь цех в телефоне — где бы вы ни находились']
     ],
 
@@ -1310,7 +1608,7 @@ const STR = {
       ['Доступ', 'Кто что видит', 'Мастер видит только свою задачу. Цены, себестоимость и зарплата — только у руководителя. Какая роль берёт какой этап, решает он же.'],
       ['Склад', 'Материал не кончится посреди работы', 'Приход-расход, остаток и резерв под заказ. Не хватает материала — нехватка видна сразу; брак и отходы тоже учитываются.'],
       ['Техкарты', 'Настроили один раз — дальше в одно нажатие', 'Для частых изделий этапы и материалы уже готовы. Изменили техкарту позже — заказы в работе не меняются.'],
-      ['Зарплата', 'Сдельная зарплата считается сама', 'У каждого этапа своя расценка; завершённое записывается на работника. В конце месяца — готовая таблица.'],
+      ['Зарплата', 'Зарплата считается сама', 'У каждого этапа своя расценка; завершённое записывается на работника. В конце месяца — готовая таблица.'],
       ['Сроки', 'Два срока', 'Дата, обещанная клиенту, и внутренний срок каждого этапа идут отдельно. Опоздал один — сразу видно, что заказ поехал.'],
       ['Общение', 'Переписка внутри заказа', 'Чат под каждым заказом, вызов сотрудника через @ и отметка непрочитанного. Кто что сделал — в ленте событий.'],
       ['Отчёты', 'Состояние цеха — в графиках', 'Принято и сдано по месяцам, стоимость заказов, где стоят заказы и сколько работы в очереди по этапам.']
@@ -1373,7 +1671,7 @@ const STR = {
     'price.lead': 'Оплата за цех, а не за каждого сотрудника. На пробный период карта не нужна.',
     'plans': [
       ['Бесплатно', '0', 'UZS', '', ['1 пользователь', 'Заказы и склад', 'Один цех', 'Основные отчёты'], [], 'Попробовать'],
-      ['Стандарт', '49 999', 'UZS / мес', 'Выбирают чаще', ['До 5 пользователей', 'Все возможности', 'Сдельная зарплата и отчёты', 'Экспорт в Excel', 'Поддержка'], ['Автоуведомления клиенту'], 'Выбрать'],
+      ['Стандарт', '49 999', 'UZS / мес', 'Выбирают чаще', ['До 5 пользователей', 'Все возможности', 'Зарплата и отчёты', 'Экспорт в Excel', 'Поддержка'], ['Автоуведомления клиенту'], 'Выбрать'],
       ['Pro', '149 999', 'UZS / мес', '', ['Без ограничения пользователей', 'Расширенные отчёты', 'Приоритетная поддержка'], ['Несколько филиалов'], 'Связаться']
     ],
     'price.soon': 'скоро',
@@ -1409,14 +1707,40 @@ const STR = {
     'form.m_name': 'Имя', 'form.m_phone': 'Телефон', 'form.m_shop': 'Цех',
     'form.m_city': 'Город', 'form.m_size': 'Сотрудников', 'form.m_note': 'Комментарий',
 
+    'nav.login': 'Войти',
+
+    'auth.dialog': 'UstaERP — вход',
+    'auth.tabs': 'Вход или регистрация',
+    'auth.close': 'Закрыть',
+    'auth.pitch': 'Каждый заказ — от замера до установленного шкафа: кто что делает, сколько стоит и что опаздывает.',
+    'auth.s1': 'Замер', 'auth.s2': 'Проект', 'auth.s3': 'Производство', 'auth.s4': 'Сдача',
+    'auth.side_note': 'Учётную запись открывает руководитель цеха — сотруднику регистрироваться не нужно.',
+    'auth.tab_in': 'Вход', 'auth.tab_up': 'Регистрация',
+    'auth.in_title': 'Войдите в свой цех',
+    'auth.in_sub': 'Под учётной записью, которую завёл руководитель.',
+    'auth.google': 'Войти через Google',
+    'auth.telegram': 'Войти через Telegram',
+    'auth.or': 'или',
+    'auth.soon_msg': 'Система ещё не запущена. После запуска вход будет здесь — пока оставьте заявку или позвоните.',
+    'auth.fine_in': 'Пароль вводится только на сервере вашего цеха. UstaERP никогда не спросит его на этой странице.',
+    'auth.up_title': 'Открыть цех',
+    'auth.up_sub': 'Регистрация откроется скоро.',
+    'auth.google_up': 'Регистрация через Google',
+    'auth.telegram_up': 'Регистрация через Telegram',
+    'auth.up_ask': 'Пока оставьте заявку — мы свяжемся и откроем цех сами.',
+    'auth.up_cta': 'Оставить заявку',
+    'auth.fine_up': 'Карта не нужна. Данные не передаются третьим лицам.',
+
+    'apps.pending': 'Приложения готовятся. После запуска загрузка появится здесь.',
+
     'foot.tag': 'Производственная CRM для мебельных цехов.',
     'foot.contact': 'Контакты', 'foot.team': 'Команда', 'foot.year': 'Год',
-    'foot.founder': 'Основатель: Джурабек Камолов', 'foot.dev': 'Разработчик: Troy'
+    'foot.founder': 'Основатель: MACRO WOOD', 'foot.dev': 'Разработчик: Джамшид Намозов'
   },
 
   en: {
-    'meta.desc': 'CRM for furniture workshops: orders, a 17-stage production pipeline, stock, piece-rate pay and deadlines in one system.',
-    'nav.features': 'Features', 'nav.how': 'How it works', 'nav.download': 'Download', 'nav.pricing': 'Pricing',
+    'meta.desc': 'CRM for furniture workshops: orders, a 17-stage production pipeline, stock, pay and deadlines in one system.',
+    'nav.features': 'Features', 'nav.how': 'How it works', 'nav.download': 'Apps', 'nav.pricing': 'Pricing',
     'nav.contact': 'Contact', 'nav.cta': 'Free trial',
 
     'hero.eyebrow': 'CRM for furniture workshops',
@@ -1444,10 +1768,10 @@ const STR = {
     'pain.col1': 'Today', 'pain.col2': 'With UstaERP',
     'pains': [
       ['Records live in a notebook and in Excel', 'Every order has its own card: client, deadline, materials, stage'],
-      ['Orders get lost, deadlines pass', 'A late order flags itself — you see it without asking'],
+      ['Time control', 'A late order flags itself — you see it without asking'],
       ['Stock figures are guesswork — material runs out mid-job', 'Stock and reservations are visible; a shortage shows on the order at once'],
-      ['Who did how much, and what they are owed, is a muddle', 'Every completed stage is recorded and the pay adds itself up'],
-      ['The client phones to ask where their order is', 'You answer "which stage?" in a second'],
+      ['Problems with wages and payment for each job', 'Every completed stage is recorded and the pay adds itself up'],
+      ['The client phones to ask where their order is', 'The bot answers "which stage?" automatically'],
       ['No boss in the workshop means no oversight', 'The whole workshop is on your phone, wherever you are']
     ],
 
@@ -1460,7 +1784,7 @@ const STR = {
       ['Access', 'Who sees what', 'A worker sees only their own task. Prices, cost and pay stay with the boss, who also decides which role may claim which stage.'],
       ['Stock', 'Material does not run out mid-job', 'Movements in and out, stock on hand and reservations per order. Shortages show immediately; scrap and defects are recorded too.'],
       ['Tech cards', 'Set it up once, then one click', 'Products you build often keep their stages and materials ready. Editing a card later never changes an order already in the workshop.'],
-      ['Payroll', 'Piece-rate pay adds itself up', 'Every stage carries a rate; finishing it credits the worker. At month end the payroll table is already written.'],
+      ['Payroll', 'Pay adds itself up', 'Every stage carries a rate; finishing it credits the worker. At month end the payroll table is already written.'],
       ['Deadlines', 'Two clocks', 'The date promised to the client and the internal deadline of each stage run separately. When one slips, the whole order shows as slipping.'],
       ['Messages', 'The conversation lives in the order', 'A chat under every order, @ to call a colleague in, and an unread marker. Who did what stays in the event feed.'],
       ['Reports', 'Workshop health in charts', 'Work taken in and delivered by month, order value, where orders are sitting and how much is queued at each stage.']
@@ -1523,7 +1847,7 @@ const STR = {
     'price.lead': 'You pay per workshop, not per head. No card is asked for during the trial.',
     'plans': [
       ['Free', '0', 'UZS', '', ['1 user', 'Orders and stock', 'One workshop', 'Basic reports'], [], 'Start free'],
-      ['Standard', '49 999', 'UZS / month', 'Most chosen', ['Up to 5 users', 'Every feature', 'Piece-rate pay and reports', 'Excel export', 'Support'], ['Automatic client updates'], 'Choose'],
+      ['Standard', '49 999', 'UZS / month', 'Most chosen', ['Up to 5 users', 'Every feature', 'Pay and reports', 'Excel export', 'Support'], ['Automatic client updates'], 'Choose'],
       ['Pro', '149 999', 'UZS / month', '', ['Unlimited users', 'Extended reports', 'Priority support'], ['Multiple branches'], 'Talk to us']
     ],
     'price.soon': 'soon',
@@ -1559,9 +1883,35 @@ const STR = {
     'form.m_name': 'Name', 'form.m_phone': 'Phone', 'form.m_shop': 'Workshop',
     'form.m_city': 'City', 'form.m_size': 'Staff', 'form.m_note': 'Note',
 
+    'nav.login': 'Log in',
+
+    'auth.dialog': 'UstaERP - sign in',
+    'auth.tabs': 'Sign in or register',
+    'auth.close': 'Close',
+    'auth.pitch': 'Every order, from the first measurement to the installed wardrobe: who is doing what, what it costs, and what is running late.',
+    'auth.s1': 'Measure', 'auth.s2': 'Design', 'auth.s3': 'Build', 'auth.s4': 'Deliver',
+    'auth.side_note': 'The workshop owner opens the account - a worker never registers separately.',
+    'auth.tab_in': 'Sign in', 'auth.tab_up': 'Register',
+    'auth.in_title': 'Sign in to your workshop',
+    'auth.in_sub': 'With the account your Director set up for you.',
+    'auth.google': 'Continue with Google',
+    'auth.telegram': 'Continue with Telegram',
+    'auth.or': 'or',
+    'auth.soon_msg': 'The system is not open yet. Signing in will happen here once it is - for now leave a request or call.',
+    'auth.fine_in': 'Your password is only ever typed on your own workshop server. UstaERP will never ask for it on this page.',
+    'auth.up_title': 'Open a workshop',
+    'auth.up_sub': 'Registration opens soon.',
+    'auth.google_up': 'Register with Google',
+    'auth.telegram_up': 'Register with Telegram',
+    'auth.up_ask': 'For now leave a request - we will call and open the workshop for you.',
+    'auth.up_cta': 'Leave a request',
+    'auth.fine_up': 'No card required. Your details are not passed to anyone else.',
+
+    'apps.pending': 'The apps are in preparation. Once the system is live the download appears here.',
+
     'foot.tag': 'Production CRM for furniture workshops.',
     'foot.contact': 'Contact', 'foot.team': 'Team', 'foot.year': 'Year',
-    'foot.founder': 'Founder: Jo\'rabek Kamolov', 'foot.dev': 'Developer: Troy'
+    'foot.founder': 'Founder: MACRO WOOD', 'foot.dev': 'Developer: Jamshid Namozov'
   }
 };
 
@@ -1588,9 +1938,18 @@ const BUILDS =
   };
 /* BUILDS:end */
 
-/* Which of the three platform cards carries a build, in the order t['apps'] lists them.
-   Kept out of the language tables on purpose — a translator has no business editing it. */
-const APP_BUILDS = [null, 'windows', 'android'];
+/* Nothing is offered for download while the product is in preparation. The site is
+   information only for now, so each platform card carries the same 'soon' flag the pricing
+   table uses, and no build is linked from anywhere.
+
+   BUILDS above is left alone: tools/publish_builds.php writes that block, and the keys it
+   fills are what the cards will read again the day the downloads go back on. To put them
+   back, name the builds here in the order t['apps'] lists the cards — [null, 'windows',
+   'android'] — and drop the `true` from the fillCards call below.
+
+   Note that taking the link off the page is not the same as taking the file off the host:
+   anything left in dist/ is still fetchable by anybody who guesses the URL. */
+const APP_BUILDS = null;
 
 const LANGS = ['uz', 'ru', 'en'];
 const el = (tag, cls, text) => {
@@ -1611,6 +1970,10 @@ function render(lang) {
   document.querySelectorAll('[data-i18n-placeholder]').forEach(node => {
     const v = t[node.dataset.i18nPlaceholder];
     if (typeof v === 'string') node.placeholder = v;
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(node => {
+    const v = t[node.dataset.i18nAria];
+    if (typeof v === 'string') node.setAttribute('aria-label', v);
   });
 
   document.documentElement.lang = lang;
@@ -1669,7 +2032,7 @@ function render(lang) {
     roles.appendChild(row);
   });
 
-  fillCards('apps', t['apps'], APP_BUILDS);
+  fillCards('apps', t['apps'], APP_BUILDS, true);
   fillCards('trust', t['trust']);
 
   // pricing
@@ -1717,7 +2080,7 @@ function render(lang) {
   });
 }
 
-function fillCards(id, rows, buildKeys) {
+function fillCards(id, rows, buildKeys, soon) {
   const box = document.getElementById(id);
   box.textContent = '';
 
@@ -1738,6 +2101,12 @@ function fillCards(id, rows, buildKeys) {
 
     const build = BUILDS && buildKeys ? BUILDS[buildKeys[i]] : null;
     if (build) card.appendChild(downloadBlock(build));
+    if (soon) {
+      // A space, so the flag is not read out welded to the platform name.
+      const tag = card.querySelector('.tag');
+      tag.appendChild(document.createTextNode(' '));
+      tag.appendChild(el('span', 'soon-flag', STR[lang]['price.soon']));
+    }
     box.appendChild(card);
   });
 }
@@ -2038,4 +2407,232 @@ document.getElementById('again').addEventListener('click', () => {
   fieldsWrap.classList.remove('off');
   form.reset();
 });
+
+/* ============================================================
+   Signing in.
+
+   This page is static and stays static. What follows does not sign anybody in; it routes
+   them to the machine that can. A workshop lives at its own address — usta1.ustaxona.com —
+   and that server holds the password and checks it. No password is ever typed here, which
+   is both the security position and the reason the panel says so out loud: a marketing
+   page asking for a workshop password is indistinguishable from a phishing page.
+
+   Four switches, and every route is off until the one it needs is filled in:
+
+     live           false while the product is in preparation. Every route then says when it
+                    will work rather than sending somebody to a host that answers nothing.
+     domain         the apex the workshop subdomains hang off.
+     googleClientId the OAuth client id from the Google Cloud console.
+     telegramBot    the login bot's username.
+     endpoint       where a provider's token is POSTed to be checked.
+
+   That last one is not decoration. A Google ID token is worth exactly nothing until a
+   server has verified its signature against Google's keys and checked the audience, the
+   issuer and the expiry; a Telegram login is an HMAC of the bot token. Neither check can
+   happen in a browser, and nothing this page can read out of a token may be trusted — a
+   token says only what whoever presented it wants it to say. So the provider buttons stay
+   off until `endpoint` names a server that does the checking. README.md sets out what that
+   endpoint has to do before it is switched on.
+   ============================================================ */
+const AUTH = {
+  live: false,
+  domain: 'ustaxona.com',
+  googleClientId: '',
+  telegramBot: '',
+  endpoint: ''
+};
+
+const authBox = document.getElementById('auth');
+
+/* Turns whatever names a workshop into the host it actually lives at. Nothing on this page
+   types one any more — the field is gone — but the endpoint answers a provider sign-in with
+   a workshop slug, and that has to be validated exactly as carefully as typing would have
+   been: it arrives over the network, and a slug is not a URL until this says it is.
+
+   The result is rebuilt from a validated host and the scheme is written here, never taken
+   from the input, so no amount of pasting can turn the destination into javascript: or into
+   somebody else's site with a userinfo trick. Returns null rather than a guess. */
+function shopHost(raw) {
+  let v = String(raw == null ? '' : raw).trim().toLowerCase();
+  v = v.replace(/^[a-z][a-z0-9+.-]*:\/\//, '');   // a pasted https://…
+  v = v.split(/[\/?#\\@:]/)[0];                   // …with a path, port or credentials on it
+  v = v.replace(/^\.+|\.+$/g, '');
+  if (!v) return null;
+  const host = v.indexOf('.') === -1 ? v + '.' + AUTH.domain : v;
+  const label = '[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?';
+  return new RegExp('^(?=.{1,253}$)' + label + '(?:\\.' + label + ')+$').test(host) ? host : null;
+}
+
+/* Each pane carries its own, because a message written into the pane that is not on screen
+   is a message nobody reads — which is how the provider buttons on the register tab came to
+   answer a click with nothing at all. */
+function authSay(key) {
+  const pane = authBox.querySelector('.auth-pane:not([hidden])');
+  const node = pane && pane.querySelector('.auth-msg');
+  if (!node) return;
+  node.textContent = STR[lang][key];
+  node.hidden = false;
+}
+function authHush() {
+  authBox.querySelectorAll('.auth-msg').forEach(node => { node.hidden = true; });
+}
+
+/* ---- the two tabs ---- */
+const AUTH_TABS = [['auth-tab-in', 'auth-in'], ['auth-tab-up', 'auth-up']];
+function authTab(which) {
+  AUTH_TABS.forEach(([tab, pane]) => {
+    const on = tab === which;
+    document.getElementById(tab).setAttribute('aria-selected', String(on));
+    document.getElementById(pane).hidden = !on;
+  });
+  authHush();
+}
+AUTH_TABS.forEach(([tab]) => document.getElementById(tab).addEventListener('click', () => authTab(tab)));
+
+/* ---- opening and shutting ---- */
+let authReturn = null;
+function authOpen() {
+  authReturn = document.activeElement;
+  authBox.classList.add('on');
+  // The page behind must not scroll under the panel, and must be where it was afterwards.
+  document.documentElement.style.overflow = 'hidden';
+  authHush();
+  const tab = document.getElementById('auth-tab-in');
+  if (tab) tab.focus();
+}
+function authClose() {
+  if (!authBox.classList.contains('on')) return;
+  authBox.classList.remove('on');
+  document.documentElement.style.overflow = '';
+  // Leaving #kirish in the address bar would reopen the panel on the next reload.
+  if (location.hash === '#kirish') {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  if (authReturn && authReturn.focus) authReturn.focus();
+}
+document.querySelectorAll('[data-auth-open]').forEach(b => b.addEventListener('click', authOpen));
+document.querySelectorAll('[data-auth-close]').forEach(b => b.addEventListener('click', authClose));
+
+/* Esc shuts it from anywhere. Listening on the panel itself was not enough: focus can be
+   sitting outside it — the language buttons in the header, for one — and Esc then reached a
+   handler that was never going to hear it. authClose() is a no-op when nothing is open. */
+document.addEventListener('keydown', ev => {
+  if (ev.key === 'Escape') authClose();
+});
+
+/* Tab stays inside it. A dialog that lets focus wander onto the page behind is a dialog a
+   keyboard cannot get out of sensibly. */
+authBox.addEventListener('keydown', ev => {
+  if (ev.key !== 'Tab') return;
+  const able = Array.from(authBox.querySelectorAll('button, input, a[href]'))
+    .filter(n => !n.disabled && n.offsetParent !== null);
+  if (!able.length) return;
+  const first = able[0], last = able[able.length - 1];
+  if (ev.shiftKey && document.activeElement === first) { last.focus(); ev.preventDefault(); }
+  else if (!ev.shiftKey && document.activeElement === last) { first.focus(); ev.preventDefault(); }
+});
+
+/* A link straight to the sign-in screen, so it can be sent to somebody. */
+if (location.hash === '#kirish') authOpen();
+
+/* Where a signed-in person is sent. Reached only from handToken() now. */
+function enterShop(host) {
+  if (!AUTH.live) { authSay('auth.soon_msg'); return; }
+  window.location.href = 'https://' + host + '/login.html';
+}
+
+/* ---- the providers ---- */
+/* Greyed with a 'soon' flag until there is somewhere to check a token, but still clickable:
+   clicking says when it will work, which a genuinely disabled button cannot do. */
+document.querySelectorAll('.prov').forEach(btn => {
+  const kind = btn.dataset.prov.replace(/-up$/, '');
+  const ready = AUTH.live && Boolean(AUTH.endpoint) &&
+    (kind === 'google' ? Boolean(AUTH.googleClientId) : Boolean(AUTH.telegramBot));
+
+  btn.disabled = false;
+  btn.setAttribute('aria-disabled', String(!ready));
+  const flag = btn.querySelector('.soon');
+  if (flag) flag.hidden = ready;
+
+  btn.addEventListener('click', () => {
+    if (!ready) { authSay('auth.soon_msg'); return; }
+    if (kind === 'google') googleSignIn();
+    else telegramSignIn(btn);
+  });
+});
+
+/* Google Identity Services, fetched the moment it is wanted and not a moment before: a page
+   somebody is only reading should not be announcing them to Google. */
+let gisLoading = null;
+function loadGis() {
+  if (!gisLoading) {
+    gisLoading = new Promise((ok, no) => {
+      const sc = document.createElement('script');
+      sc.src = 'https://accounts.google.com/gsi/client';
+      sc.async = true;
+      sc.onload = ok;
+      sc.onerror = no;
+      document.head.appendChild(sc);
+    });
+  }
+  return gisLoading;
+}
+
+function googleSignIn() {
+  loadGis().then(() => {
+    google.accounts.id.initialize({
+      client_id: AUTH.googleClientId,
+      callback: res => handToken('google', res.credential)
+    });
+    google.accounts.id.prompt();
+  }).catch(() => authSay('auth.soon_msg'));
+}
+
+/* Telegram's widget draws its own button and hands back a user object signed with the bot
+   token, so it replaces ours rather than being driven by it. */
+function telegramSignIn(btn) {
+  window.onTelegramAuth = user => handToken('telegram', user);
+  const sc = document.createElement('script');
+  sc.src = 'https://telegram.org/js/telegram-widget.js?22';
+  sc.async = true;
+  sc.setAttribute('data-telegram-login', AUTH.telegramBot);
+  sc.setAttribute('data-size', 'large');
+  sc.setAttribute('data-onauth', 'onTelegramAuth(user)');
+  btn.replaceWith(sc);
+}
+
+/* Hand whatever the provider gave us to the server, which is the only party that can tell
+   whether it is genuine. Nothing in the payload is read here — not the address, not the
+   name, not the picture — because none of it has been verified yet.
+
+   The one thing that comes back is which workshop the account belongs to, and even that is
+   put through shopHost() rather than used as a URL: the destination is rebuilt from a host
+   name, so a compromised endpoint can send somebody to the wrong workshop but not to a
+   different scheme or a different site. */
+function handToken(provider, payload) {
+  fetch(AUTH.endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'omit',
+    body: JSON.stringify({ provider: provider, payload: payload })
+  })
+    .then(r => (r.ok ? r.json() : Promise.reject(r)))
+    .then(res => {
+      const host = shopHost(res && res.workshop);
+      if (host) enterShop(host);
+      else authSay('auth.soon_msg');
+    })
+    .catch(() => authSay('auth.soon_msg'));
+}
+
+/* ---- registering, for as long as that means asking us ---- */
+document.getElementById('auth-to-form').addEventListener('click', () => {
+  authClose();
+  document.getElementById('aloqa').scrollIntoView({
+    block: 'start', behavior: still.matches ? 'auto' : 'smooth'
+  });
+  const name = document.getElementById('f-name');
+  if (name) setTimeout(() => name.focus({ preventScroll: true }), still.matches ? 0 : 600);
+});
+
 </script>
