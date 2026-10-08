@@ -1533,6 +1533,15 @@ footer a:hover{border-bottom-color:var(--accent);}
           <p class="auth-sub" data-i18n="auth.up_sub">Ro'yxatdan o'tish tez orada ochiladi.</p>
 
           <div class="auth-provs">
+            <!-- By phone: the one sign-up route that does not need a third party. It leaves
+                 this page for the product's own signup.html (AUTH.signupUrl), where the number
+                 is proven by SMS and the password is chosen -- on the server that will check
+                 it, never here. -->
+            <button type="button" class="prov prov-phone" data-signup-phone disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span data-i18n="auth.phone_up">Telefon raqam bilan ro'yxatdan o'tish</span>
+              <span class="soon" data-i18n="price.soon">tez orada</span>
+            </button>
             <button type="button" class="prov" data-prov="google-up" disabled>
               <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24s.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
               <span data-i18n="auth.google_up">Google bilan ro'yxatdan o'tish</span>
@@ -1745,6 +1754,7 @@ const STR = {
     'auth.up_sub': "Ro'yxatdan o'tish tez orada ochiladi.",
     'auth.google_up': "Google bilan ro'yxatdan o'tish",
     'auth.telegram_up': "Telegram bilan ro'yxatdan o'tish",
+    'auth.phone_up': "Telefon raqam bilan ro'yxatdan o'tish",
     'auth.up_ask': "Hozircha so'rov qoldiring — biz bog'lanamiz va ustaxonangizni o'zimiz ochib beramiz.",
     'auth.up_cta': "So'rov qoldirish",
     'auth.fine_up': "Karta so'ralmaydi. Ma'lumotingiz uchinchi tomonga berilmaydi.",
@@ -1931,6 +1941,7 @@ const STR = {
     'auth.up_sub': 'Регистрация откроется скоро.',
     'auth.google_up': 'Регистрация через Google',
     'auth.telegram_up': 'Регистрация через Telegram',
+    'auth.phone_up': 'Регистрация по номеру телефона',
     'auth.up_ask': 'Пока оставьте заявку — мы свяжемся и откроем цех сами.',
     'auth.up_cta': 'Оставить заявку',
     'auth.fine_up': 'Карта не нужна. Данные не передаются третьим лицам.',
@@ -2117,6 +2128,7 @@ const STR = {
     'auth.up_sub': 'Registration opens soon.',
     'auth.google_up': 'Register with Google',
     'auth.telegram_up': 'Register with Telegram',
+    'auth.phone_up': 'Register with your phone number',
     'auth.up_ask': 'For now leave a request - we will call and open the workshop for you.',
     'auth.up_cta': 'Leave a request',
     'auth.fine_up': 'No card required. Your details are not passed to anyone else.',
@@ -2653,7 +2665,12 @@ const AUTH = {
   domain: 'ustaxona.com',
   googleClientId: '',
   telegramBot: '',
-  endpoint: ''
+  endpoint: '',
+  // The product's own sign-up page on the shared hosted install, for example
+  // 'https://app.ustaxona.com/signup.html'. Empty keeps the phone button saying "soon".
+  // Unlike the provider routes it needs no endpoint here: the SMS code is sent and checked
+  // by that server, and nothing comes back to this page.
+  signupUrl: ''
 };
 
 const authBox = document.getElementById('auth');
@@ -2758,7 +2775,7 @@ function enterShop(host) {
 /* ---- the providers ---- */
 /* Greyed with a 'soon' flag until there is somewhere to check a token, but still clickable:
    clicking says when it will work, which a genuinely disabled button cannot do. */
-document.querySelectorAll('.prov').forEach(btn => {
+document.querySelectorAll('.prov[data-prov]').forEach(btn => {
   const kind = btn.dataset.prov.replace(/-up$/, '');
   const ready = AUTH.live && Boolean(AUTH.endpoint) &&
     (kind === 'google' ? Boolean(AUTH.googleClientId) : Boolean(AUTH.telegramBot));
@@ -2774,6 +2791,25 @@ document.querySelectorAll('.prov').forEach(btn => {
     else telegramSignIn(btn);
   });
 });
+
+/* By phone: a plain hand-off to the product's own sign-up page, carrying the language the
+   visitor is reading in -- that page is on another host, so it cannot see this page's
+   choice. Greyed and saying "soon" on the same terms as the providers above. */
+(() => {
+  const btn = document.querySelector('[data-signup-phone]');
+  if (!btn) return;
+  const ready = AUTH.live && /^https:\/\//.test(AUTH.signupUrl);
+  btn.disabled = false;
+  btn.setAttribute('aria-disabled', String(!ready));
+  const flag = btn.querySelector('.soon');
+  if (flag) flag.hidden = ready;
+  btn.addEventListener('click', () => {
+    if (!ready) { authSay('auth.soon_msg'); return; }
+    const url = new URL(AUTH.signupUrl);
+    url.searchParams.set('lang', lang);
+    window.location.href = url.toString();
+  });
+})();
 
 /* Google Identity Services, fetched the moment it is wanted and not a moment before: a page
    somebody is only reading should not be announcing them to Google. */
