@@ -1,6 +1,6 @@
-# UstaERP — customer website
+# Ustaxona — customer website
 
-The public site for UstaERP, a workflow CRM for custom furniture workshops. It is written for
+The public site for Ustaxona, a workflow CRM for custom furniture workshops. It is written for
 an owner deciding whether to buy: what the product does, what it costs, and a form that turns a
 visitor into a phone call.
 
@@ -199,7 +199,7 @@ Pages those are simply absent; putting Cloudflare in front, or serving from the 
 buys them. Enforce HTTPS regardless.
 
 **No password is ever typed on this host.** The sign-in screen collects a workshop address and
-nothing else, and says outright that UstaERP will never ask for a password here — which is the
+nothing else, and says outright that Ustaxona will never ask for a password here — which is the
 sentence that lets a customer recognise a fake later.
 
 **Nothing executable is offered from this domain** while the product is in preparation. Note
