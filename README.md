@@ -70,9 +70,9 @@ the tag, leave it empty (`''`) and it is an ordinary card.
 **Phone number** — the hero, the contact block, the footer and the call button under the trial
 form. Search for `998905012611`.
 
-**Telegram** is the public account `@ustaxonainfo`, in four places: the contact block, the
+**Telegram** goes to `@Jama_Namozov`, in four places: the contact block, the
 footer, the Telegram button under the trial form, and the floating button in the corner. Search
-for `ustaxonainfo`. The floating button shows once the hero is scrolled past and stands down
+for `Jama_Namozov`. The floating button shows once the hero is scrolled past and stands down
 while the contact block or the footer is on screen, since both already carry the link.
 
 **Copy** — all of it lives in `STR`, one block per language (`uz`, `ru`, `en`). The markup
