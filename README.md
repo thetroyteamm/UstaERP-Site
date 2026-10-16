@@ -67,12 +67,13 @@ list renders greyed with a "soon" flag, which is how something planned is shown 
 promised. The badge marks the recommended plan: give it text and the card gains the border and
 the tag, leave it empty (`''`) and it is an ordinary card.
 
-**Phone number** — appears four times: the hero, the contact block, the footer and the Telegram
-button. Search for `998905012611`.
+**Phone number** — the hero, the contact block, the footer and the call button under the trial
+form. Search for `998905012611`.
 
-**The Telegram button** points at a `t.me` link built from that number, which only resolves if
-the number is reachable that way. A public username — `https://t.me/ustaerp`, say — is more
-reliable and reads better to a customer.
+**Telegram** is the public account `@ustaxonainfo`, in four places: the contact block, the
+footer, the Telegram button under the trial form, and the floating button in the corner. Search
+for `ustaxonainfo`. The floating button shows once the hero is scrolled past and stands down
+while the contact block or the footer is on screen, since both already carry the link.
 
 **Copy** — all of it lives in `STR`, one block per language (`uz`, `ru`, `en`). The markup
 carries `data-i18n` keys, never sentences, so a wording change happens in one place. The

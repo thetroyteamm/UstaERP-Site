@@ -135,6 +135,10 @@
   --on-dark:#ffffff;
   --on-dark-soft:#8a99ad;
   --on-dark-accent:#d4892e;
+  /* Telegram's own blue is #229ed9, but white on it is 3.0:1; this is the same hue darkened
+     until the button's white label clears AA (4.9:1). Same in both themes. */
+  --tg:#1877ad;
+  --tg-dark:#176a9b;
   --glow-light:rgba(212,137,46,.14);
 
   --shadow-sm:0 1px 2px rgba(20,22,26,.05), 0 1px 3px rgba(20,22,26,.04);
@@ -662,6 +666,25 @@ main{counter-reset:sec;}
   .shot-frame{border-radius:var(--radius);}
   .shot-frame figcaption{padding:13px 16px 15px; font-size:14.5px;}
 }
+
+/* ---------- Telegram ---------- */
+.cta-or{margin-top:14px;}
+.tg-float{
+  position:fixed; right:22px; bottom:22px; z-index:45; display:flex; align-items:center; gap:9px;
+  padding:12px 19px 12px 14px; border-radius:999px; background:var(--tg); color:#fff;
+  font-size:15px; font-weight:600; text-decoration:none;
+  box-shadow:0 14px 32px -12px rgba(24,119,173,.75), var(--shadow-md);
+  transition:opacity .25s ease, transform .25s ease, background .15s ease, visibility .25s;
+}
+.tg-float svg{width:24px; height:24px; flex:none;}
+.tg-float:hover{background:var(--tg-dark); transform:translateY(-2px);}
+.tg-float:focus-visible{outline:3px solid var(--accent); outline-offset:3px;}
+.tg-float.away{opacity:0; visibility:hidden; transform:translateY(14px); pointer-events:none;}
+@media (max-width:640px){
+  .tg-float{right:14px; bottom:14px; padding:14px;}
+  .tg-float span{display:none;}
+}
+@media print{ .tg-float{display:none;} }
 
 /* ---------- plan finder ---------- */
 /* The app's dark surface, like the recommended plan above it: it is the same decision. */
@@ -1601,6 +1624,8 @@ footer a:hover{border-bottom-color:var(--accent);}
       <div class="cta-contact">
         <div data-i18n="form.call">To'g'ridan-to'g'ri qo'ng'iroq qiling:</div>
         <a href="tel:+998905012611">+998 90 501 26 11</a>
+        <div class="cta-or" data-i18n="form.tg_or">yoki Telegramda yozing:</div>
+        <a href="https://t.me/ustaxonainfo" target="_blank" rel="noopener">@ustaxonainfo</a>
       </div>
     </div>
 
@@ -1647,7 +1672,7 @@ footer a:hover{border-bottom-color:var(--accent);}
         <pre id="msg"></pre>
         <div class="sent-btns">
           <button type="button" class="btn btn-primary" id="copy" data-i18n="form.copy">Nusxa olish</button>
-          <a class="btn btn-on-dark" href="https://t.me/+998905012611" target="_blank" rel="noopener" data-i18n="form.tg">Telegram</a>
+          <a class="btn btn-on-dark" href="https://t.me/ustaxonainfo" target="_blank" rel="noopener" data-i18n="form.tg">Telegram</a>
           <a class="btn btn-on-dark" href="tel:+998905012611" data-i18n="form.phone_btn">Qo'ng'iroq</a>
         </div>
         <button type="button" class="btn btn-on-dark" id="again" data-i18n="form.again">Qaytadan to'ldirish</button>
@@ -1657,6 +1682,13 @@ footer a:hover{border-bottom-color:var(--accent);}
 </section>
 
 </main>
+
+<!-- Always one tap from a conversation. Shown once the hero is passed, and stood down while
+     the contact block or the footer is on screen, since both carry the same link already. -->
+<a class="tg-float away" id="tgFloat" href="https://t.me/ustaxonainfo" target="_blank" rel="noopener" data-i18n-aria="tg.float" aria-label="Telegramda yozing">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+  <span data-i18n="tg.float">Telegramda yozing</span>
+</a>
 
 <footer>
   <div class="wrap foot-in">
@@ -1671,6 +1703,7 @@ footer a:hover{border-bottom-color:var(--accent);}
       <div>
         <b data-i18n="foot.contact">Aloqa</b>
         <a href="tel:+998905012611">+998 90 501 26 11</a>
+        <a href="https://t.me/ustaxonainfo" target="_blank" rel="noopener">Telegram: @ustaxonainfo</a>
       </div>
       <div>
         <b data-i18n="foot.team">Jamoa</b>
@@ -1991,6 +2024,7 @@ const STR = {
     'form.done_title': "So'rovingiz tayyor",
     'form.done_lead': "Quyidagi xabarni Telegramga qo'ying yoki qo'ng'iroq qilib ayting — bir ish kunida bog'lanamiz.",
     'form.copy': 'Nusxa olish', 'form.copied': 'Nusxa olindi',
+    'form.tg_or': 'yoki Telegramda yozing:', 'tg.float': 'Telegramda yozing',
     'form.tg': 'Telegram', 'form.phone_btn': "Qo'ng'iroq", 'form.again': "Qaytadan to'ldirish",
     'form.msg_head': 'Ustaxona — bepul sinov so\'rovi',
     'form.m_name': 'Ism', 'form.m_phone': 'Telefon', 'form.m_shop': 'Ustaxona',
@@ -2220,6 +2254,7 @@ const STR = {
     'form.done_title': 'Заявка готова',
     'form.done_lead': 'Отправьте это сообщение в Telegram или продиктуйте по телефону — свяжемся в течение рабочего дня.',
     'form.copy': 'Скопировать', 'form.copied': 'Скопировано',
+    'form.tg_or': 'или напишите в Telegram:', 'tg.float': 'Написать в Telegram',
     'form.tg': 'Telegram', 'form.phone_btn': 'Позвонить', 'form.again': 'Заполнить заново',
     'form.msg_head': 'Ustaxona — заявка на бесплатную пробу',
     'form.m_name': 'Имя', 'form.m_phone': 'Телефон', 'form.m_shop': 'Цех',
@@ -2449,6 +2484,7 @@ const STR = {
     'form.done_title': 'Your request is ready',
     'form.done_lead': 'Send this message on Telegram or read it out by phone — we answer within one working day.',
     'form.copy': 'Copy', 'form.copied': 'Copied',
+    'form.tg_or': 'or message us on Telegram:', 'tg.float': 'Message us on Telegram',
     'form.tg': 'Telegram', 'form.phone_btn': 'Call', 'form.again': 'Start over',
     'form.msg_head': 'Ustaxona — free trial request',
     'form.m_name': 'Name', 'form.m_phone': 'Phone', 'form.m_shop': 'Workshop',
@@ -2926,6 +2962,25 @@ function onScroll() {
   progressBar.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
 }
 window.addEventListener('scroll', onScroll, { passive: true });
+
+const tgFloat = document.getElementById('tgFloat');
+const tgCovered = new Set();
+function placeTg() {
+  const pastHero = (window.scrollY || 0) > window.innerHeight * 0.6;
+  tgFloat.classList.toggle('away', !pastHero || tgCovered.size > 0);
+}
+if ('IntersectionObserver' in window) {
+  const tgWatch = new IntersectionObserver(entries => {
+    entries.forEach(e => (e.isIntersecting ? tgCovered.add(e.target) : tgCovered.delete(e.target)));
+    placeTg();
+  });
+  ['aloqa', 'footer'].forEach(id => {
+    const node = id === 'footer' ? document.querySelector('footer') : document.getElementById(id);
+    if (node) tgWatch.observe(node);
+  });
+}
+window.addEventListener('scroll', placeTg, { passive: true });
+placeTg();
 window.addEventListener('resize', onScroll, { passive: true });
 onScroll();
 
