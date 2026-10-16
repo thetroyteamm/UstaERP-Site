@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="uz">
 <meta charset="utf-8">
 <title>Ustaxona — mebel ustaxonalari uchun CRM</title>
 <meta name="description" content="Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, oylik va muddatlar — bitta tizimda.">
@@ -612,6 +613,25 @@ main{counter-reset:sec;}
 .sec-head{max-width:none; margin-bottom:48px;}
 .sec-head h2{font-size:clamp(29px, 3.6vw, 40px); letter-spacing:var(--tracking-tight); margin:16px 0 14px; max-width:22ch;}
 .sec-head p{font-size:17.5px; color:var(--ink-soft); max-width:52ch;}
+
+/* ---------- keyboard and contrast ---------- */
+/* Off-screen until a keyboard reaches it, then the first thing on the page. */
+.skip{
+  position:fixed; left:16px; top:-60px; z-index:60; padding:10px 18px; border-radius:999px;
+  background:var(--accent); color:var(--on-accent); font-weight:600; text-decoration:none;
+  box-shadow:var(--shadow-md); transition:top .15s ease;
+}
+.skip:focus{top:12px; outline:3px solid var(--ink); outline-offset:2px;}
+main:focus{outline:none;}
+/* Interface amber is 4.6:1 on paper but 4.3:1 on the grey bands, short of AA for small text.
+   Labels set in it on those bands take the deeper amber (5.5:1). In the dark theme the bands
+   are near-black and the lighter amber already clears it, so this is light-only. */
+:root:not([data-theme="dark"]) .sec-alt .step em,
+:root:not([data-theme="dark"]) .sec-alt .road-item.now em{color:var(--accent-dark);}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .sec-alt .step em,
+  :root:not([data-theme="light"]) .sec-alt .road-item.now em{color:var(--accent);}
+}
 
 /* ---------- the product itself: film + screens ---------- */
 /* Both sit on the app's own dark surface in either theme, because that is what the product
@@ -1276,13 +1296,14 @@ footer a:hover{border-bottom-color:var(--accent);}
 }
 </style>
 
+<a class="skip" href="#top" data-i18n="skip">Asosiy qismga o'tish</a>
 <header class="top">
   <div class="wrap top-in">
     <a class="brand" href="#top" aria-label="Ustaxona">
       <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--brand)" d="M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z"/></svg>
       <span>Ustaxona</span>
     </a>
-    <nav>
+    <nav data-i18n-aria="nav.label" aria-label="Bo'limlar">
       <a href="#imkoniyat" data-i18n="nav.features">Imkoniyatlar</a>
       <a href="#jarayon" data-i18n="nav.how">Qanday ishlaydi</a>
       <a class="nav-dl" href="#yuklab" data-i18n="nav.download">Yuklab olish</a>
@@ -1307,7 +1328,7 @@ footer a:hover{border-bottom-color:var(--accent);}
   <div class="progress" aria-hidden="true"><span></span></div>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
 
 <section class="hero">
   <div class="wrap hero-in">
@@ -1851,6 +1872,7 @@ const STR = {
   uz: {
     'meta.desc': "Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, oylik va muddatlar — bitta tizimda.",
     'nav.features': 'Imkoniyatlar', 'nav.how': 'Qanday ishlaydi', 'nav.download': 'Ilovalar', 'nav.pricing': 'Narxlar',
+    'skip': "Asosiy qismga o'tish", 'nav.label': "Bo'limlar",
     'nav.contact': 'Aloqa', 'nav.cta': 'Bepul sinash',
 
     'hero.eyebrow': 'Mebel ustaxonalari uchun CRM',
@@ -2091,6 +2113,7 @@ const STR = {
   ru: {
     'meta.desc': 'CRM для мебельных цехов: заказы, 17 этапов производства, склад, зарплата и сроки — в одной системе.',
     'nav.features': 'Возможности', 'nav.how': 'Как работает', 'nav.download': 'Приложения', 'nav.pricing': 'Тарифы',
+    'skip': 'Перейти к содержанию', 'nav.label': 'Разделы',
     'nav.contact': 'Контакты', 'nav.cta': 'Попробовать',
 
     'hero.eyebrow': 'CRM для мебельных цехов',
@@ -2331,6 +2354,7 @@ const STR = {
   en: {
     'meta.desc': 'CRM for furniture workshops: orders, a 17-stage production pipeline, stock, pay and deadlines in one system.',
     'nav.features': 'Features', 'nav.how': 'How it works', 'nav.download': 'Apps', 'nav.pricing': 'Pricing',
+    'skip': 'Skip to content', 'nav.label': 'Sections',
     'nav.contact': 'Contact', 'nav.cta': 'Free trial',
 
     'hero.eyebrow': 'CRM for furniture workshops',
