@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Ustaxona</title>
+<title>Ustaxona — mebel ustaxonalari uchun CRM</title>
 <meta name="description" content="Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, oylik va muddatlar — bitta tizimda.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -25,6 +25,15 @@
 <meta name="twitter:description" content="Mebel ustaxonalari uchun CRM: buyurtma, ombor, ishchilar va muddatlar bitta tizimda.">
 <meta name="twitter:image" content="https://ustaxona.com/media/og.jpg">
 <link rel="canonical" href="https://ustaxona.com/">
+<!-- One page, three languages: each has its own address (?lang=ru, ?lang=en; Uzbek is the bare
+     domain) so a search engine can index all three and send each visitor to theirs. The script
+     reads ?lang= first and keeps the address, canonical and FAQ data in step with the switch. -->
+<link rel="alternate" hreflang="uz" href="https://ustaxona.com/">
+<link rel="alternate" hreflang="ru" href="https://ustaxona.com/?lang=ru">
+<link rel="alternate" hreflang="en" href="https://ustaxona.com/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://ustaxona.com/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://ustaxona.com/#org", "name": "Ustaxona", "url": "https://ustaxona.com/", "telephone": "+998905012611", "areaServed": "UZ"}, {"@type": "SoftwareApplication", "name": "Ustaxona", "url": "https://ustaxona.com/", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows, Web browser", "inLanguage": ["uz", "ru", "en"], "image": "https://ustaxona.com/media/og.jpg", "description": "Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, oylik va muddatlar — bitta tizimda.", "publisher": {"@id": "https://ustaxona.com/#org"}, "offers": [{"@type": "Offer", "name": "Bepul", "price": "0", "priceCurrency": "UZS"}, {"@type": "Offer", "name": "Standart", "price": "49999", "priceCurrency": "UZS"}, {"@type": "Offer", "name": "Pro", "price": "149999", "priceCurrency": "UZS"}]}]}</script>
+<script type="application/ld+json" id="ld-faq">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "uz", "mainEntity": [{"@type": "Question", "name": "Internet kerakmi?", "acceptedAnswer": {"@type": "Answer", "text": "Yo'q. Tizim ustaxonangizdagi kompyuterda ishlaydi, xodimlar unga shu yerdagi Wi-Fi yoki telefon hotspoti orqali kiradi. Internet uzilsa ham ish to'xtamaydi."}}, {"@type": "Question", "name": "Ma'lumotlarim qayerda saqlanadi?", "acceptedAnswer": {"@type": "Answer", "text": "O'z kompyuteringizda. Bulutga hech nima yuborilmaydi. Narx, tannarx va oyliklarni faqat rahbar ko'radi."}}, {"@type": "Question", "name": "Xodimlarim kompyuterni bilmaydi — eplay oladimi?", "acceptedAnswer": {"@type": "Answer", "text": "Usta ekranida uchta tugma bor: «Ishni oldim», «Tugatdim», «Muammo bor». Tizimni o'zimiz o'rnatamiz, xodimlarni o'rgatamiz va yozma qo'llanma qoldiramiz."}}, {"@type": "Question", "name": "Telefondan ishlasa bo'ladimi?", "acceptedAnswer": {"@type": "Answer", "text": "Ha — telefon brauzeridan, ustaxona tarmog'i orqali. Android va Windows ilovalarini yuklab olish tizim ishga tushganda ochiladi; iPhone ilovasi tayyorlanmoqda."}}, {"@type": "Question", "name": "Bizda 17 bosqichning hammasi yo'q-ku?", "acceptedAnswer": {"@type": "Answer", "text": "Shart emas. Har bir buyurtma o'ziga kerakli bosqichlarni oladi: oddiy stolga CNC ham, qoplash ham belgilanmaydi. Tez-tez ishlanadigan mahsulotni texnik kartada bir marta sozlaysiz."}}, {"@type": "Question", "name": "To'lov qanday hisoblanadi?", "acceptedAnswer": {"@type": "Answer", "text": "Ustaxona uchun, xodim boshiga emas. Tarif foydalanuvchilar soniga qarab tanlanadi: bir kishiga bepul, besh kishigacha Standart, undan ko'pi — Pro."}}, {"@type": "Question", "name": "Sinov tugagach nima bo'ladi?", "acceptedAnswer": {"@type": "Answer", "text": "14 kun bepul ishlatasiz, karta so'ralmaydi. Keyin tarif tanlaysiz yoki to'xtatasiz — yoqmasa, bir tiyin ham to'lamaysiz."}}, {"@type": "Question", "name": "Qaysi tillarda ishlaydi?", "acceptedAnswer": {"@type": "Answer", "text": "O'zbek, rus va ingliz tillarida — har kim o'z tilini tanlaydi. Summalarni so'm, dollar yoki rublda ko'rish mumkin."}}]}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23C75B22' d='M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z'/%3E%3C/svg%3E" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -652,6 +661,64 @@ main{counter-reset:sec;}
   .shot-tabs::-webkit-scrollbar{display:none;}
   .shot-frame{border-radius:var(--radius);}
   .shot-frame figcaption{padding:13px 16px 15px; font-size:14.5px;}
+}
+
+/* ---------- plan finder ---------- */
+/* The app's dark surface, like the recommended plan above it: it is the same decision. */
+.calc{
+  margin-top:44px; display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); overflow:hidden;
+  background:var(--dark-raise); border:1px solid var(--dark-line); border-radius:var(--radius-lg);
+  color:var(--on-dark); box-shadow:var(--shadow-lg);
+}
+.calc-in{padding:30px 32px; display:flex; flex-direction:column; gap:22px;}
+.calc h3{font-size:22px; letter-spacing:var(--tracking-tight); color:var(--on-dark);}
+.calc-lead{margin-top:6px; font-size:14.5px; color:var(--on-dark-soft);}
+.calc-row label{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 9px;}
+.calc-row label small{font-family:var(--font-body); font-size:12.5px; font-weight:400; letter-spacing:0; text-transform:none; color:var(--on-dark-soft);}
+.calc-ctl{display:flex; align-items:center; gap:16px; margin-top:8px;}
+.calc input[type=range]{flex:1; min-width:0; height:26px; padding:0; border:0; background:none; box-shadow:none; accent-color:var(--on-dark-accent); cursor:pointer;}
+.calc input[type=range]:focus-visible{box-shadow:none; outline:2px solid var(--on-dark-accent); outline-offset:3px; border-radius:4px;}
+.calc output{min-width:2.6em; text-align:right; font-size:21px; font-weight:600; font-variant-numeric:tabular-nums; color:var(--on-dark);}
+.calc-out{padding:30px 32px; display:flex; flex-direction:column; gap:12px; background:var(--dark); border-left:1px solid var(--dark-line);}
+.calc-k{font-size:10.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--on-dark-soft);}
+.calc-plan b{display:block; font-size:32px; letter-spacing:var(--tracking-tight); color:var(--on-dark-accent);}
+.calc-plan span{font-size:15px; color:var(--on-dark-soft); font-variant-numeric:tabular-nums;}
+.calc-out dl{margin:6px 0 0; padding-top:14px; border-top:1px solid var(--dark-line);}
+.calc-out dt{font-size:13.5px; color:var(--on-dark-soft);}
+.calc-out dd{margin:2px 0 0; font-size:22px; font-weight:600; font-variant-numeric:tabular-nums;}
+.calc-out p{font-size:14.5px; color:var(--on-dark-soft);}
+.calc-out p:empty{display:none;}
+.calc-out p b{color:var(--on-dark); font-weight:600; font-variant-numeric:tabular-nums;}
+.calc-out .btn{margin-top:auto; align-self:flex-start;}
+.calc-out .btn-primary{background:var(--on-dark-accent); color:var(--dark);}
+.calc-out .btn-primary:hover{background:#e67e22;}
+@media (max-width:860px){
+  .calc{grid-template-columns:minmax(0,1fr);}
+  .calc-out{border-left:0; border-top:1px solid var(--dark-line);}
+}
+@media (max-width:640px){
+  .calc-in, .calc-out{padding:22px 20px;}
+}
+
+/* ---------- questions ---------- */
+.faq{max-width:860px; border-top:1px solid var(--line-strong);}
+.faq details{border-bottom:1px solid var(--line);}
+.faq summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:20px 0; font-size:17.5px; font-weight:600; color:var(--ink); transition:color .15s ease;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"+"; flex:none; width:30px; height:30px; display:grid; place-items:center; border-radius:50%;
+  border:1px solid var(--line-strong); color:var(--accent); font-size:18px; font-weight:500; transition:transform .2s ease;
+}
+.faq details[open] summary::after{transform:rotate(45deg);}
+.faq summary:hover{color:var(--accent);}
+.faq summary:focus-visible{outline:2px solid var(--accent); outline-offset:4px; border-radius:4px;}
+.faq p{padding:0 50px 22px 0; max-width:68ch; font-size:15.5px; color:var(--ink-soft);}
+@media (max-width:640px){
+  .faq summary{font-size:16px; padding:17px 0;}
+  .faq p{padding-right:0;}
 }
 
 /* ---------- before / after ---------- */
@@ -1462,6 +1529,41 @@ footer a:hover{border-bottom-color:var(--accent);}
       <div><b data-i18n="price.f2b">4 ta qurilma</b><span data-i18n="price.f2">— har bir foydalanuvchi uchun</span></div>
       <div><b data-i18n="price.f3b">O'rnatish va o'qitish</b><span data-i18n="price.f3">— biz tomondan, qo'shimcha to'lovsiz</span></div>
     </div>
+
+    <!-- Plan finder. Arithmetic on the visitor's own numbers and nothing else: it picks the plan
+         by head-count and sets its price against their turnover. It promises no saving, because
+         the page may only claim what the software does (README, "What the page may claim"). -->
+    <div class="calc" id="calc">
+      <div class="calc-in">
+        <div>
+          <h3 data-i18n="calc.title">Qaysi tarif sizga mos?</h3>
+          <p class="calc-lead" data-i18n="calc.lead"></p>
+        </div>
+        <div class="calc-row">
+          <label for="calc-users"><span data-i18n="calc.users">Tizimdan foydalanadiganlar</span><small data-i18n="calc.users_hint"></small></label>
+          <div class="calc-ctl"><input type="range" id="calc-users" min="1" max="40" step="1" value="4"><output for="calc-users" id="calc-users-v">4</output></div>
+        </div>
+        <div class="calc-row">
+          <label for="calc-orders" data-i18n="calc.orders">Oyiga buyurtma</label>
+          <div class="calc-ctl"><input type="range" id="calc-orders" min="1" max="100" step="1" value="12"><output for="calc-orders" id="calc-orders-v">12</output></div>
+        </div>
+        <div class="calc-row">
+          <label for="calc-avg" data-i18n="calc.avg">O'rtacha buyurtma, mln so'm</label>
+          <div class="calc-ctl"><input type="range" id="calc-avg" min="1" max="100" step="1" value="15"><output for="calc-avg" id="calc-avg-v">15</output></div>
+        </div>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <span class="calc-k" data-i18n="calc.plan">Sizga mos tarif</span>
+        <div class="calc-plan"><b id="calc-plan"></b><span id="calc-price"></span></div>
+        <dl>
+          <dt data-i18n="calc.turnover">Oylik aylanmangiz</dt>
+          <dd id="calc-turn"></dd>
+        </dl>
+        <p id="calc-share"></p>
+        <p id="calc-pay"></p>
+        <a class="btn btn-primary" href="#aloqa" data-i18n="calc.cta">14 kun bepul sinash</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1472,6 +1574,16 @@ footer a:hover{border-bottom-color:var(--accent);}
       <h2 data-i18n="road.title">Qachon nima tayyor bo'ladi</h2>
     </div>
     <div class="road" id="road"></div>
+  </div>
+</section>
+
+<section class="sec" id="savollar">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-i18n="faq.eyebrow">Savollar</p>
+      <h2 data-i18n="faq.title">Ko'p so'raladigan savollar</h2>
+    </div>
+    <div class="faq" id="faq"></div>
   </div>
 </section>
 
@@ -1827,6 +1939,35 @@ const STR = {
     'price.f2b': '4 ta qurilma', 'price.f2': '— har bir foydalanuvchi uchun',
     'price.f3b': "O'rnatish va o'qitish", 'price.f3': "— biz tomondan, qo'shimcha to'lovsiz",
 
+    'meta.title': "Ustaxona — mebel ustaxonalari uchun CRM",
+    'calc.title': "Qaysi tarif sizga mos?",
+    'calc.lead': "O'z raqamlaringizni kiriting. Hisob shu sahifada bajariladi — hech qayerga yuborilmaydi.",
+    'calc.users': "Tizimdan foydalanadiganlar",
+    'calc.users_hint': "rahbar, menejer va ustalar",
+    'calc.orders': "Oyiga buyurtma",
+    'calc.avg': "O'rtacha buyurtma, mln so'm",
+    'calc.plan': "Sizga mos tarif",
+    'calc.free': "bepul",
+    'calc.month': "so'm / oy",
+    'calc.turnover': "Oylik aylanmangiz",
+    'calc.sum': "so'm",
+    'calc.share': "Tarif narxi — aylanmaning {x}",
+    'calc.pay': "Bitta o'rtacha buyurtma — {x} oylik obuna",
+    'calc.free_note': "Bir kishi ishlasa, bepul tarif yetadi.",
+    'calc.cta': "14 kun bepul sinash",
+
+    'faq.eyebrow': "Savollar", 'faq.title': "Ko'p so'raladigan savollar",
+    'faq': [
+      ["Internet kerakmi?", "Yo'q. Tizim ustaxonangizdagi kompyuterda ishlaydi, xodimlar unga shu yerdagi Wi-Fi yoki telefon hotspoti orqali kiradi. Internet uzilsa ham ish to'xtamaydi."],
+      ["Ma'lumotlarim qayerda saqlanadi?", "O'z kompyuteringizda. Bulutga hech nima yuborilmaydi. Narx, tannarx va oyliklarni faqat rahbar ko'radi."],
+      ["Xodimlarim kompyuterni bilmaydi — eplay oladimi?", "Usta ekranida uchta tugma bor: «Ishni oldim», «Tugatdim», «Muammo bor». Tizimni o'zimiz o'rnatamiz, xodimlarni o'rgatamiz va yozma qo'llanma qoldiramiz."],
+      ["Telefondan ishlasa bo'ladimi?", "Ha — telefon brauzeridan, ustaxona tarmog'i orqali. Android va Windows ilovalarini yuklab olish tizim ishga tushganda ochiladi; iPhone ilovasi tayyorlanmoqda."],
+      ["Bizda 17 bosqichning hammasi yo'q-ku?", "Shart emas. Har bir buyurtma o'ziga kerakli bosqichlarni oladi: oddiy stolga CNC ham, qoplash ham belgilanmaydi. Tez-tez ishlanadigan mahsulotni texnik kartada bir marta sozlaysiz."],
+      ["To'lov qanday hisoblanadi?", "Ustaxona uchun, xodim boshiga emas. Tarif foydalanuvchilar soniga qarab tanlanadi: bir kishiga bepul, besh kishigacha Standart, undan ko'pi — Pro."],
+      ["Sinov tugagach nima bo'ladi?", "14 kun bepul ishlatasiz, karta so'ralmaydi. Keyin tarif tanlaysiz yoki to'xtatasiz — yoqmasa, bir tiyin ham to'lamaysiz."],
+      ["Qaysi tillarda ishlaydi?", "O'zbek, rus va ingliz tillarida — har kim o'z tilini tanlaydi. Summalarni so'm, dollar yoki rublda ko'rish mumkin."],
+    ],
+
     'road.eyebrow': 'Reja', 'road.title': 'Qachon nima tayyor bo\'ladi',
     'road': [
       ['Hozir', 'Prototip', "Interfeys va asosiy jarayonlar tayyor — ustaxonalar bilan sinovdan o'tkazyapmiz."],
@@ -2026,6 +2167,35 @@ const STR = {
     'price.f1b': '14 дней бесплатно', 'price.f1': '— пробный период, потом решаете',
     'price.f2b': '4 устройства', 'price.f2': '— на каждого пользователя',
     'price.f3b': 'Установка и обучение', 'price.f3': '— с нашей стороны, без доплаты',
+
+    'meta.title': "Ustaxona — CRM для мебельных цехов",
+    'calc.title': "Какой тариф вам подходит?",
+    'calc.lead': "Введите свои цифры. Расчёт идёт прямо на странице — никуда не отправляется.",
+    'calc.users': "Кто будет работать в системе",
+    'calc.users_hint': "директор, менеджер и мастера",
+    'calc.orders': "Заказов в месяц",
+    'calc.avg': "Средний заказ, млн сум",
+    'calc.plan': "Ваш тариф",
+    'calc.free': "бесплатно",
+    'calc.month': "сум / мес",
+    'calc.turnover': "Оборот в месяц",
+    'calc.sum': "сум",
+    'calc.share': "Тариф — {x} оборота",
+    'calc.pay': "Один средний заказ — {x} мес. подписки",
+    'calc.free_note': "Если работает один человек, хватит бесплатного тарифа.",
+    'calc.cta': "14 дней бесплатно",
+
+    'faq.eyebrow': "Вопросы", 'faq.title': "Частые вопросы",
+    'faq': [
+      ["Нужен ли интернет?", "Нет. Система работает на компьютере в вашем цехе, сотрудники заходят в неё через местный Wi-Fi или точку доступа телефона. Пропал интернет — работа не останавливается."],
+      ["Где хранятся мои данные?", "На вашем компьютере. В облако ничего не отправляется. Цены, себестоимость и зарплату видит только руководитель."],
+      ["Мои сотрудники не дружат с компьютером. Справятся?", "На экране мастера три кнопки: «Взял в работу», «Завершил», «Есть проблема». Мы сами устанавливаем систему, обучаем сотрудников и оставляем письменную инструкцию."],
+      ["Можно работать с телефона?", "Да — через браузер телефона, в сети цеха. Скачивание приложений для Android и Windows откроется, когда система будет запущена; приложение для iPhone готовится."],
+      ["А если у нас не все 17 этапов?", "Это не нужно. Каждый заказ берёт только нужные этапы: простому столу не назначаются ни ЧПУ, ни обивка. Часто повторяющееся изделие настраиваете один раз в техкарте."],
+      ["Как считается оплата?", "За цех, а не за каждого сотрудника. Тариф выбирается по числу пользователей: один — бесплатно, до пяти — Стандарт, больше — Pro."],
+      ["Что будет после пробного периода?", "14 дней пользуетесь бесплатно, карту не спрашиваем. Потом выбираете тариф или отказываетесь — не понравилось, не платите ни копейки."],
+      ["На каких языках работает?", "На узбекском, русском и английском — каждый выбирает свой. Суммы можно смотреть в сумах, долларах или рублях."],
+    ],
 
     'road.eyebrow': 'План', 'road.title': 'Что и когда будет готово',
     'road': [
@@ -2227,6 +2397,35 @@ const STR = {
     'price.f2b': '4 devices', 'price.f2': '— for each user',
     'price.f3b': 'Installation and training', 'price.f3': '— from us, at no extra cost',
 
+    'meta.title': "Ustaxona — CRM for furniture workshops",
+    'calc.title': "Which plan fits you?",
+    'calc.lead': "Put in your own numbers. It is worked out on this page and sent nowhere.",
+    'calc.users': "People using the system",
+    'calc.users_hint': "director, manager and craftsmen",
+    'calc.orders': "Orders a month",
+    'calc.avg': "Average order, million so'm",
+    'calc.plan': "Your plan",
+    'calc.free': "free",
+    'calc.month': "so'm / month",
+    'calc.turnover': "Monthly turnover",
+    'calc.sum': "so'm",
+    'calc.share': "The plan is {x} of turnover",
+    'calc.pay': "One average order pays for {x} months",
+    'calc.free_note': "If one person uses it, the free plan is enough.",
+    'calc.cta': "Try 14 days free",
+
+    'faq.eyebrow': "Questions", 'faq.title': "Questions we get asked",
+    'faq': [
+      ["Do we need the internet?", "No. The system runs on a computer in your workshop, and staff reach it over the workshop Wi-Fi or a phone hotspot. If the internet drops, work carries on."],
+      ["Where is our data kept?", "On your own computer. Nothing is sent to a cloud. Prices, costs and pay are visible to the director only."],
+      ["My staff aren't good with computers. Will they manage?", "A craftsman's screen has three buttons: “I took the job”, “Finished”, “There is a problem”. We install it ourselves, train your staff and leave a written guide."],
+      ["Can we use it from a phone?", "Yes — in the phone's browser, on the workshop network. Android and Windows app downloads open once the system goes live; the iPhone app is in the works."],
+      ["What if we don't use all 17 stages?", "You don't have to. Each order takes only the stages it needs: a plain table gets neither CNC nor upholstery. A product you make often is set up once, as a tech card."],
+      ["How is the price worked out?", "Per workshop, not per employee. The plan follows the number of users: one is free, up to five is Standard, more is Pro."],
+      ["What happens after the trial?", "You use it free for 14 days, no card asked. Then you pick a plan or stop — if you don't like it, you pay nothing."],
+      ["Which languages does it speak?", "Uzbek, Russian and English — each person picks their own. Amounts can be shown in so'm, dollars or roubles."],
+    ],
+
     'road.eyebrow': 'Roadmap', 'road.title': 'What is ready, and when',
     'road': [
       ['Now', 'Prototype', 'The interface and the core processes are built — we are proving them in real workshops.'],
@@ -2350,11 +2549,17 @@ function render(lang) {
   });
 
   document.documentElement.lang = lang;
-  document.title = 'Ustaxona';
+  document.title = t['meta.title'];
+  const here = langUrl(lang);
+  document.querySelector('link[rel="canonical"]').href = 'https://ustaxona.com/' + here.query;
+  document.querySelector('meta[property="og:locale"]').content = { uz: 'uz_UZ', ru: 'ru_RU', en: 'en_US' }[lang];
+  try { history.replaceState(null, '', location.pathname + here.query + location.hash); } catch (e) { /* file:// */ }
   const desc = document.querySelector('meta[name="description"]');
   if (desc) desc.content = t['meta.desc'];
 
   renderShots(lang);
+  renderFaq(lang);
+  renderCalc(lang);
 
   // 17-stage rail — numbered because the pipeline genuinely is a sequence
   const rail = document.getElementById('rail');
@@ -2540,7 +2745,16 @@ if (!still.matches) {
 
 /* ---- language choice ---- */
 const LANG_KEY = 'ustaerp_site_lang';
+// Uzbek lives at the bare address; the other two carry ?lang=, which is what the hreflang
+// links in <head> promise a search engine.
+function langUrl(lang) {
+  return { query: lang === 'uz' ? '' : '?lang=' + lang };
+}
 function pickLang() {
+  // An address that names a language wins over a remembered choice: it is what the visitor
+  // (or the search result they clicked) asked for.
+  const asked = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(asked)) return asked;
   const saved = localStorage.getItem(LANG_KEY);
   if (LANGS.includes(saved)) return saved;
   // Uzbek unless the browser is set to Russian. Deliberately not a full language match:
@@ -2616,6 +2830,66 @@ document.getElementById('shot-tabs').addEventListener('keydown', e => {
   document.querySelectorAll('#shot-tabs button')[i].focus();
 });
 
+/* Questions. Built from STR so all three languages stay one list, and mirrored into the
+   FAQPage data in <head> so a search engine reads the questions in the language shown. Which
+   ones are open survives a language switch. */
+function renderFaq(lang) {
+  const box = document.getElementById('faq');
+  const open = [...box.querySelectorAll('details')].map(d => d.open);
+  box.textContent = '';
+  STR[lang]['faq'].forEach(([q, a], i) => {
+    const d = el('details');
+    d.open = !!open[i];
+    d.appendChild(el('summary', null, q));
+    d.appendChild(el('p', null, a));
+    box.appendChild(d);
+  });
+  document.getElementById('ld-faq').textContent = JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'FAQPage', inLanguage: lang,
+    mainEntity: STR[lang]['faq'].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+  });
+}
+
+/* Plan finder. Head-count picks the plan, by the same limits the plan cards print (one user,
+   up to five, unlimited); the rest is the visitor's turnover set against that price. */
+const PLAN_SEATS = [1, 5, Infinity];
+const calcIds = ['users', 'orders', 'avg'];
+const groupDigits = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+function withBold(node, template, value) {
+  const [before, after] = template.split('{x}');
+  node.textContent = '';
+  node.appendChild(document.createTextNode(before));
+  node.appendChild(el('b', null, value));
+  node.appendChild(document.createTextNode(after || ''));
+}
+function renderCalc(lang) {
+  const t = STR[lang];
+  const v = {};
+  calcIds.forEach(id => {
+    v[id] = Number(document.getElementById('calc-' + id).value);
+    document.getElementById('calc-' + id + '-v').textContent = v[id];
+  });
+  const i = PLAN_SEATS.findIndex(max => v.users <= max);
+  const [name, amount] = t['plans'][i];
+  const price = Number(String(amount).replace(/\D/g, ''));
+  const turnover = v.orders * v.avg * 1e6;
+  document.getElementById('calc-plan').textContent = name;
+  document.getElementById('calc-price').textContent = price ? amount + ' ' + t['calc.month'] : t['calc.free'];
+  document.getElementById('calc-turn').textContent = groupDigits(turnover) + ' ' + t['calc.sum'];
+  const share = document.getElementById('calc-share');
+  const pay = document.getElementById('calc-pay');
+  if (!price) {
+    share.textContent = t['calc.free_note'];
+    pay.textContent = '';
+    return;
+  }
+  const pct = price / turnover * 100;
+  const pctText = (pct < 0.01 ? '<0.01' : pct.toFixed(pct < 1 ? 2 : 1)).replace('.', lang === 'en' ? '.' : ',') + '%';
+  withBold(share, t['calc.share'], pctText);
+  withBold(pay, t['calc.pay'], groupDigits(Math.floor(v.avg * 1e6 / price)));
+}
+calcIds.forEach(id => document.getElementById('calc-' + id).addEventListener('input', () => renderCalc(lang)));
+
 function playFilm() {
   if (film.hidden) {
     film.src = 'media/video/promo-' + lang + '.mp4';
@@ -2667,7 +2941,7 @@ if ('IntersectionObserver' in window && !still.matches) {
     });
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
   document.querySelectorAll(
-    '.sec-head, .film, .shots, .row-head, .rows, .grid3, .also, .flow, .split, .cards, .soon-note, .plans, .fine, .road, .foot-in'
+    '.sec-head, .film, .shots, .calc, .faq, .row-head, .rows, .grid3, .also, .flow, .split, .cards, .soon-note, .plans, .fine, .road, .foot-in'
   ).forEach(node => { node.classList.add('rv'); seen.observe(node); });
 }
 

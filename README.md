@@ -112,6 +112,26 @@ file name.
 1200×630, the promo's title frame with the address under it. Its URL in `<head>` is absolute,
 so it only works once the page is served from `ustaxona.com`.
 
+## Questions, the plan finder, and search engines
+
+**Questions** are `'faq'` in `STR`, `[question, answer]` per row, once per language. Answers
+follow the same rule as everything else here: only what the software does today. The script
+also copies the list into the FAQPage data in `<head>` (`#ld-faq`), so nothing else needs
+editing.
+
+**The plan finder** under the price cards is arithmetic on the visitor's own numbers: head-count
+picks the plan (limits in `PLAN_SEATS`, matching the cards: 1, 5, unlimited), and the price is
+set against their turnover. It deliberately promises no saving. If the plans or their user
+limits change, change `PLAN_SEATS` with them.
+
+**Search engines.** Each language has its own address: Uzbek is the bare domain, Russian and
+English carry `?lang=ru` / `?lang=en`. The `hreflang` links in `<head>` and `sitemap.xml` list
+all three; the script reads `?lang=` before the remembered choice and keeps the address, title,
+canonical link and `og:locale` in step with the switch. `robots.txt` points at the sitemap.
+The published `live` branch is rebuilt from scratch rather than merged, so when the full
+site goes up, `robots.txt` and `sitemap.xml` have to be copied onto it along with `index.html`
+and `media/`.
+
 ## The downloads
 
 The Android and Windows builds are offered on their own platform cards, each showing the
