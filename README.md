@@ -97,6 +97,11 @@ promo, rebuild the web copies with the ffmpeg Remotion ships:
 
 `media/video/poster-<lang>.webp` is the frame at 21 s, the dashboard scene.
 
+Phones held upright get the vertical cut instead, `promo-<lang>-9x16.mp4` with
+`poster-<lang>-9x16.webp` (same command, `-9x16` on both names and `scale=720:-2`), because
+the 16:9 film's type is unreadable at 343px wide. The choice is made when the page loads or
+the language changes, never mid-play.
+
 **The screens** are `media/screens/<screen>-<lang>.webp`. They are taken from the real app,
 filled with a workshop that does not exist, so no real customer can ever show up on the page:
 
@@ -132,6 +137,14 @@ canonical link and `og:locale` in step with the switch. `robots.txt` points at t
 The published `live` branch is rebuilt from scratch rather than merged, so when the full
 site goes up, `robots.txt` and `sitemap.xml` have to be copied onto it along with `index.html`
 and `media/`.
+
+## The 404 page
+
+`404.html` is what GitHub Pages serves for any address it has no file for. It is
+self-contained (its own styles, the same light/dark tokens and theme switch memory), picks
+uz/ru/en the way the main page does, and links home and to Telegram. Copy it onto `live`
+with the rest. The local PHP preview server answers unknown paths with `index.html`, so test
+it by opening `/404.html` directly.
 
 ## The downloads
 

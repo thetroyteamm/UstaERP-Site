@@ -623,6 +623,10 @@ main{counter-reset:sec;}
   border-radius:var(--radius-lg); background:var(--dark); border:1px solid var(--dark-line); box-shadow:var(--shadow-lg);
 }
 .film video, .film-cover img{display:block; width:100%; height:100%; object-fit:cover;}
+/* A phone held upright gets the vertical cut, which was made for exactly that screen: the
+   16:9 one shrinks its type to 343px wide and it stops being readable. Capped so the frame
+   never runs past the screen. */
+.film.tall{aspect-ratio:9/16; max-height:calc(100vh - 120px); max-height:calc(100svh - 120px); margin-inline:auto;}
 .film-cover{position:absolute; inset:0; padding:0; border:0; background:none; cursor:pointer; color:var(--on-dark); font:inherit;}
 .film video[hidden], .film-cover[hidden]{display:none;}
 .film-cover::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,12,16,.1) 35%, rgba(10,12,16,.82));}
@@ -1610,6 +1614,18 @@ footer a:hover{border-bottom-color:var(--accent);}
   </div>
 </section>
 
+<section class="sec sec-alt" id="boshlash">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-i18n="start.eyebrow">Boshlash</p>
+      <h2 data-i18n="start.title">Qanday boshlaymiz</h2>
+      <p data-i18n="start.lead">O'rnatish va o'qitish — biz tomondan. Sizdan bitta qo'ng'iroq.</p>
+    </div>
+    <!-- Same rail as "how it works" above: a sequence, drawn the one way this page draws one. -->
+    <div class="flow" id="start"></div>
+  </div>
+</section>
+
 <section class="cta" id="aloqa">
   <div class="wrap cta-in">
     <div>
@@ -1911,6 +1927,16 @@ const STR = {
     'feat.also3': 'Mijozlar bazasi', 'feat.also4': 'Brak va chiqindi hisobi',
     'feat.also5': "O'zbek, rus, ingliz tillari", 'feat.also6': 'Excelga eksport',
 
+    'start.eyebrow': "Boshlash", 'start.title': "Qanday boshlaymiz",
+    'start.lead': "O'rnatish va o'qitish — biz tomondan. Sizdan bitta qo'ng'iroq.",
+    'start': [
+      ["So'rov", "Formani to'ldirasiz yoki qo'ng'iroq qilasiz — bir ish kunida bog'lanamiz."],
+      ["O'rnatish", "Ustaxonangizga kelamiz, tizimni o'z kompyuteringizga o'rnatamiz va sozlaymiz: rollar, bosqichlar, xodimlar."],
+      ["O'qitish", "Xodimlarni o'rgatamiz va yozma qo'llanma qoldiramiz."],
+      ["14 kun sinov", "Haqiqiy buyurtmalaringiz bilan ishlaysiz. Karta so'ralmaydi."],
+      ["Qaror", "Tarif tanlaysiz yoki to'xtatasiz. Yoqmasa — bir tiyin ham to'lamaysiz."],
+    ],
+
     'flow.eyebrow': 'Qanday ishlaydi',
     'flow.title': "Buyurtma keldi — topshirilgunicha ko'rinib turadi",
     'flow.lead': "Har bosqichni o'z egasi oladi va tugatadi. Kim, qachon va nimani qilgani yozilib boradi.",
@@ -2141,6 +2167,16 @@ const STR = {
     'feat.also3': 'База клиентов', 'feat.also4': 'Учёт брака и отходов',
     'feat.also5': 'Узбекский, русский, английский', 'feat.also6': 'Экспорт в Excel',
 
+    'start.eyebrow': "Начало", 'start.title': "Как мы начинаем",
+    'start.lead': "Установка и обучение — с нашей стороны. От вас — один звонок.",
+    'start': [
+      ["Заявка", "Заполняете форму или звоните — свяжемся в течение рабочего дня."],
+      ["Установка", "Приезжаем в цех, ставим систему на ваш компьютер и настраиваем: роли, этапы, сотрудники."],
+      ["Обучение", "Обучаем сотрудников и оставляем письменную инструкцию."],
+      ["14 дней пробы", "Работаете на своих настоящих заказах. Карту не спрашиваем."],
+      ["Решение", "Выбираете тариф или отказываетесь. Не понравилось — не платите ни копейки."],
+    ],
+
     'flow.eyebrow': 'Как работает',
     'flow.title': 'Заказ пришёл — и виден до самой сдачи',
     'flow.lead': 'Каждый этап кто-то берёт и закрывает. Кто, когда и что сделал — записывается.',
@@ -2370,6 +2406,16 @@ const STR = {
     'feat.also1': 'Photos and drawings', 'feat.also2': 'Printable job sheet for the workshop',
     'feat.also3': 'Client directory', 'feat.also4': 'Defect and scrap tracking',
     'feat.also5': 'Uzbek, Russian, English', 'feat.also6': 'Excel export',
+
+    'start.eyebrow': "Getting started", 'start.title': "How we get you started",
+    'start.lead': "Installation and training are on us. From you, one call.",
+    'start': [
+      ["Request", "Fill in the form or call us — we answer within one working day."],
+      ["Installation", "We come to your workshop, install the system on your own computer and set it up: roles, stages, staff."],
+      ["Training", "We train your staff and leave a written guide."],
+      ["14-day trial", "You work on your real orders. No card asked."],
+      ["Decision", "Pick a plan or stop. If you do not like it, you pay nothing."],
+    ],
 
     'flow.eyebrow': 'How it works',
     'flow.title': 'From the order arriving to the day it ships',
@@ -2639,6 +2685,16 @@ function render(lang) {
     flow.appendChild(step);
   });
 
+  const start = document.getElementById('start');
+  start.textContent = '';
+  t['start'].forEach(([title, body], i) => {
+    const step = el('div', 'step');
+    step.appendChild(el('em', null, String(i + 1).padStart(2, '0')));
+    step.appendChild(el('h3', null, title));
+    step.appendChild(el('p', null, body));
+    start.appendChild(step);
+  });
+
   const roles = document.getElementById('roles');
   roles.textContent = '';
   t['roles'].forEach(([who, what]) => {
@@ -2809,11 +2865,24 @@ const film = document.getElementById('film-video');
 const filmCover = document.getElementById('film-cover');
 let shotIndex = 0;
 
+// Upright phones get the 9:16 cut. Decided once per load and per language switch, never
+// mid-play: a rotating phone keeps the film it started.
+const tallScreen = window.matchMedia('(max-width: 640px) and (orientation: portrait)');
+const filmCut = () => (tallScreen.matches ? '-9x16' : '');
+function setFilmShape() {
+  const tall = tallScreen.matches;
+  document.getElementById('film').classList.toggle('tall', tall);
+  const poster = document.getElementById('film-poster');
+  poster.width = tall ? 720 : 1280;
+  poster.height = tall ? 1280 : 720;
+}
+
 function renderShots(lang) {
-  document.getElementById('film-poster').src = 'media/video/poster-' + lang + '.webp';
+  if (film.hidden) setFilmShape();
+  document.getElementById('film-poster').src = 'media/video/poster-' + lang + filmCut() + '.webp';
   if (!film.hidden && film.paused) {
-    film.src = 'media/video/promo-' + lang + '.mp4';
-    film.poster = 'media/video/poster-' + lang + '.webp';
+    film.src = 'media/video/promo-' + lang + filmCut() + '.mp4';
+    film.poster = 'media/video/poster-' + lang + filmCut() + '.webp';
   }
 
   const list = STR[lang]['shots.list'];
@@ -2928,8 +2997,8 @@ calcIds.forEach(id => document.getElementById('calc-' + id).addEventListener('in
 
 function playFilm() {
   if (film.hidden) {
-    film.src = 'media/video/promo-' + lang + '.mp4';
-    film.poster = 'media/video/poster-' + lang + '.webp';
+    film.src = 'media/video/promo-' + lang + filmCut() + '.mp4';
+    film.poster = 'media/video/poster-' + lang + filmCut() + '.webp';
     film.hidden = false;
     filmCover.hidden = true;
   }
@@ -2938,6 +3007,8 @@ function playFilm() {
 }
 // The cover plays in place; the hero button lets the anchor scroll and starts it on arrival.
 document.querySelectorAll('[data-film-play]').forEach(n => n.addEventListener('click', playFilm));
+// Turning the phone before pressing play swaps the cover to match.
+tallScreen.addEventListener('change', () => { if (film.hidden) renderShots(lang); });
 
 let lang = pickLang();
 document.querySelectorAll('.langs button').forEach(b => {
