@@ -16,3 +16,6 @@ desktop.ini
 .DS_Store
 *.swp
 *~
+
+# Sign-in for the local screenshot database (tools/seed_screenshot_db.php)
+/tools/screenshot-db.local

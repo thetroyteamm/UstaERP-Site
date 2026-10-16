@@ -4,11 +4,26 @@
 <meta name="description" content="Mebel ustaxonalari uchun CRM: buyurtma, 17 bosqichli ishlab chiqarish, ombor, oylik va muddatlar — bitta tizimda.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://telegram.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com https://oauth.telegram.org; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://telegram.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com https://oauth.telegram.org; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta property="og:title" content="Ustaxona — ustaxonangiz kaftingizda">
 <meta property="og:description" content="Mebel ustaxonalari uchun CRM: buyurtma, ombor, ishchilar va muddatlar bitta tizimda.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ustaxona.com/">
+<meta property="og:site_name" content="Ustaxona">
+<meta property="og:locale" content="uz_UZ">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<!-- Absolute, because Telegram and the rest fetch it without the page around it. 1200x630 is
+     the shape every one of them crops to; the picture is the promo film's own title frame. -->
+<meta property="og:image" content="https://ustaxona.com/media/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ustaxona — ustaxonangiz kaftingizda">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ustaxona — ustaxonangiz kaftingizda">
+<meta name="twitter:description" content="Mebel ustaxonalari uchun CRM: buyurtma, ombor, ishchilar va muddatlar bitta tizimda.">
+<meta name="twitter:image" content="https://ustaxona.com/media/og.jpg">
 <link rel="canonical" href="https://ustaxona.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23C75B22' d='M50,83.542Q42.386,83.542 36.651,80.843Q30.916,78.145 27.783,72.458Q24.651,66.771 24.651,58L24.651,47.205Q24.651,42.289 24.651,37.47Q24.651,32.651 24.602,27.735Q24.554,22.819 24.458,18L37.855,18Q37.855,22.819 37.807,27.687Q37.759,32.554 37.759,37.422Q37.759,42.289 37.759,47.205L37.759,55.976Q37.759,63.301 39.59,67.735Q41.422,72.169 44.892,74.193Q48.361,76.217 53.277,76.217Q58.193,76.217 61.711,74.096Q65.229,71.976 67.06,67.398Q68.892,62.819 68.892,55.398L68.892,18L75.157,18L75.157,56.265Q75.157,65.518 72.169,71.59Q69.181,77.663 63.542,80.602Q57.904,83.542 50,83.542ZM16.265,23.59L16.265,18L47.205,18L47.205,23.59L34.289,24.361L28.699,24.361L16.265,23.59ZM59.253,23.59L59.253,18L83.735,18L83.735,23.59L73.133,24.169L70.434,24.169L59.253,23.59Z'/%3E%3C/svg%3E" type="image/svg+xml">
 
@@ -585,6 +600,60 @@ main{counter-reset:sec;}
 .sec-head h2{font-size:clamp(29px, 3.6vw, 40px); letter-spacing:var(--tracking-tight); margin:16px 0 14px; max-width:22ch;}
 .sec-head p{font-size:17.5px; color:var(--ink-soft); max-width:52ch;}
 
+/* ---------- the product itself: film + screens ---------- */
+/* Both sit on the app's own dark surface in either theme, because that is what the product
+   looks like; the page around them follows the theme as usual. */
+.btn-film{gap:8px;}
+.btn-film svg{width:15px; height:15px; color:var(--on-dark-accent);}
+.film{
+  position:relative; margin:0 0 64px; aspect-ratio:16/9; overflow:hidden;
+  border-radius:var(--radius-lg); background:var(--dark); border:1px solid var(--dark-line); box-shadow:var(--shadow-lg);
+}
+.film video, .film-cover img{display:block; width:100%; height:100%; object-fit:cover;}
+.film-cover{position:absolute; inset:0; padding:0; border:0; background:none; cursor:pointer; color:var(--on-dark); font:inherit;}
+.film video[hidden], .film-cover[hidden]{display:none;}
+.film-cover::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,12,16,.1) 35%, rgba(10,12,16,.82));}
+.film-btn{
+  position:absolute; left:50%; top:50%; z-index:1; width:84px; height:84px; margin:-42px 0 0 -42px;
+  display:grid; place-items:center; border-radius:50%; background:var(--on-dark-accent); color:var(--dark);
+  box-shadow:0 0 0 12px rgba(212,137,46,.16), var(--glow); transition:transform .2s ease, box-shadow .2s ease;
+}
+.film-btn svg{width:30px; height:30px; margin-left:4px;}
+.film-cover:hover .film-btn, .film-cover:focus-visible .film-btn{transform:scale(1.06); box-shadow:0 0 0 16px rgba(212,137,46,.2), var(--glow);}
+.film-cover:focus-visible{outline:3px solid var(--on-dark-accent); outline-offset:-3px;}
+.film-cap{position:absolute; left:26px; bottom:22px; z-index:1; display:flex; align-items:baseline; gap:12px; font-size:15px; color:var(--on-dark-soft);}
+.film-cap b{font-size:18px; font-weight:600; color:var(--on-dark);}
+
+.shot-tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px;}
+.shot-tabs button{
+  font:inherit; font-size:14.5px; font-weight:600; padding:9px 17px; cursor:pointer; white-space:nowrap;
+  border-radius:999px; border:1px solid var(--line-strong); background:var(--panel); color:var(--ink-soft);
+  transition:color .15s ease, border-color .15s ease, background .15s ease;
+}
+.shot-tabs button:hover{color:var(--ink); border-color:var(--ink-faint);}
+.shot-tabs button[aria-selected="true"]{background:var(--accent); border-color:var(--accent); color:var(--on-accent);}
+.shot-frame{margin:0; overflow:hidden; border-radius:var(--radius-lg); background:var(--dark-raise); border:1px solid var(--dark-line); box-shadow:var(--shadow-lg);}
+.shot-bar{display:flex; align-items:center; gap:7px; padding:12px 16px; border-bottom:1px solid var(--dark-line);}
+.shot-bar i{width:10px; height:10px; border-radius:50%; background:var(--dark-line);}
+.shot-bar span{margin-left:10px; font-size:12.5px; font-weight:600; color:var(--on-dark-soft);}
+.shot-pic{display:block; aspect-ratio:2016/1260; background:var(--dark); cursor:zoom-in;}
+.shot-pic img{display:block; width:100%; height:100%; transition:opacity .2s ease;}
+.shot-pic img.swapping{opacity:.35;}
+.shot-frame figcaption{padding:16px 22px 18px; border-top:1px solid var(--dark-line); font-size:15.5px; color:var(--on-dark-soft);}
+.shot-frame figcaption b{display:block; margin-bottom:3px; font-size:16px; color:var(--on-dark);}
+.shot-note{margin-top:14px; font-size:13.5px; color:var(--ink-faint);}
+@media (max-width:640px){
+  .film{margin-bottom:44px; border-radius:var(--radius);}
+  .film-btn{width:62px; height:62px; margin:-31px 0 0 -31px;}
+  .film-btn svg{width:24px; height:24px;}
+  .film-cap{left:16px; bottom:13px; font-size:13px; gap:9px;}
+  .film-cap b{font-size:15px;}
+  .shot-tabs{flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 14px; padding:0 16px 2px; scrollbar-width:none;}
+  .shot-tabs::-webkit-scrollbar{display:none;}
+  .shot-frame{border-radius:var(--radius);}
+  .shot-frame figcaption{padding:13px 16px 15px; font-size:14.5px;}
+}
+
 /* ---------- before / after ---------- */
 /* A ledger opened flat: what happens today down the left, what happens with the system down
    the right, and the fold between them drawn as a real line. */
@@ -1155,6 +1224,10 @@ footer a:hover{border-bottom-color:var(--accent);}
       <div class="hero-cta">
         <a class="btn btn-primary" href="#aloqa" data-i18n="hero.cta1">14 kun bepul sinash</a>
         <a class="btn btn-on-dark" href="#narx" data-i18n="hero.cta2">Narxlarni ko'rish</a>
+        <a class="btn btn-on-dark btn-film" href="#korinishi" data-film-play>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.2v11.6L15.8 10z" fill="currentColor"/></svg>
+          <span data-i18n="hero.cta3">Video · 35 s</span>
+        </a>
       </div>
       <p class="hero-note">
         <span data-i18n="hero.note">O'rnatib beramiz va xodimlarni o'rgatamiz.</span>
@@ -1243,6 +1316,41 @@ footer a:hover{border-bottom-color:var(--accent);}
       <div class="rail-track">
         <div class="chips" id="rail"></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- The product itself: the promo film, then the real app's screens. The screens are taken
+     from an invented workshop (tools/seed_screenshot_db.php, tools/capture_screens.mjs), one
+     set per language, and the film is cut per language too; the script swaps both with the
+     rest of the page. The film loads nothing until it is asked to play. -->
+<section class="sec" id="korinishi">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-i18n="shots.eyebrow">Tizimning o'zi</p>
+      <h2 data-i18n="shots.title">Rasm emas — ishlayotgan dastur</h2>
+      <p data-i18n="shots.lead">Asosiysi — 35 soniyalik videoda. Pastda esa dasturning haqiqiy ekranlari, namuna ustaxona ma'lumotlari bilan.</p>
+    </div>
+
+    <figure class="film" id="film">
+      <video id="film-video" preload="none" playsinline controls hidden data-i18n-aria="shots.video"></video>
+      <button type="button" class="film-cover" id="film-cover" data-film-play>
+        <img id="film-poster" src="media/video/poster-uz.webp" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <span class="film-btn" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6.5 4.2v11.6L15.8 10z" fill="currentColor"/></svg></span>
+        <span class="film-cap"><b data-i18n="shots.play">Videoni ko'rish</b><span data-i18n="shots.len">35 soniya</span></span>
+      </button>
+    </figure>
+
+    <div class="shots">
+      <div class="shot-tabs" role="tablist" id="shot-tabs" data-i18n-aria="shots.tabs" aria-label="Dastur ekranlari"></div>
+      <figure class="shot-frame" id="shot-panel" role="tabpanel">
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>Ustaxona</span></div>
+        <a class="shot-pic" id="shot-link" href="media/screens/director-uz.webp" target="_blank" rel="noopener">
+          <img id="shot-img" src="media/screens/director-uz.webp" alt="" width="2016" height="1260" loading="lazy" decoding="async">
+        </a>
+        <figcaption id="shot-cap"></figcaption>
+      </figure>
+      <p class="shot-note" data-i18n="shots.note">Ekrandagi ustaxona, mijozlar va raqamlar namuna uchun o'ylab topilgan.</p>
     </div>
   </div>
 </section>
@@ -1587,7 +1695,20 @@ const STR = {
     'hero.eyebrow': 'Mebel ustaxonalari uchun CRM',
     'hero.title': 'Ustaxonangiz kaftingizda',
     'hero.lead': "Buyurtma, ombor, ishchilar va muddatlar — bitta tizimda. Kompyuterda ham, telefonda ham. Ma'lumot esa ustaxonangizning o'z kompyuterida qoladi.",
-    'hero.cta1': '14 kun bepul sinash', 'hero.cta2': "Narxlarni ko'rish",
+    'hero.cta1': '14 kun bepul sinash', 'hero.cta2': "Narxlarni ko'rish", 'hero.cta3': 'Video · 35 s',
+
+    'shots.eyebrow': "Tizimning o'zi",
+    'shots.title': 'Rasm emas — ishlayotgan dastur',
+    'shots.lead': "Asosiysi — 35 soniyalik videoda. Pastda esa dasturning haqiqiy ekranlari, namuna ustaxona ma'lumotlari bilan.",
+    'shots.play': "Videoni ko'rish", 'shots.len': '35 soniya', 'shots.video': 'Ustaxona haqida video',
+    'shots.tabs': 'Dastur ekranlari',
+    'shots.list': [
+      ['director', 'Direktor paneli', "Faol buyurtmalar, kechikishlar va har bir buyurtma qaysi bosqichda ekani — bitta ekranda."],
+      ['board', 'Ishlab chiqarish doskasi', "Har bir buyurtma o'zi turgan bosqich ustunida. Uni kim ushlab turgani ham ko'rinadi."],
+      ['analytics', 'Tahlil', "Oyma-oy: qancha buyurtma keldi, qanchasi topshirildi va qaysi mebel ko'proq pul keltiradi."],
+      ['finance', 'Moliya', "Har bir buyurtma bo'yicha narx, to'langan, qarz va foyda. Xarajatlar toifalari bilan."],
+    ],
+    'shots.note': "Ekrandagi ustaxona, mijozlar va raqamlar namuna uchun o'ylab topilgan.",
     'hero.note': "O'rnatib beramiz va xodimlarni o'rgatamiz.",
 
     'mock.title': "Oshxona to'plami — 3 ta shkaf", 'mock.badge': 'Muddatida',
@@ -1774,7 +1895,20 @@ const STR = {
     'hero.eyebrow': 'CRM для мебельных цехов',
     'hero.title': 'Ваш цех — на ладони',
     'hero.lead': 'Заказы, склад, работники и сроки — в одной системе. И на компьютере, и на телефоне. А данные остаются на вашем компьютере в цехе.',
-    'hero.cta1': '14 дней бесплатно', 'hero.cta2': 'Смотреть тарифы',
+    'hero.cta1': '14 дней бесплатно', 'hero.cta2': 'Смотреть тарифы', 'hero.cta3': 'Видео · 35 с',
+
+    'shots.eyebrow': 'Сама система',
+    'shots.title': 'Не картинка — работающая программа',
+    'shots.lead': 'Главное — в 35-секундном видео. Ниже — настоящие экраны программы на данных примерного цеха.',
+    'shots.play': 'Смотреть видео', 'shots.len': '35 секунд', 'shots.video': 'Видео об Ustaxona',
+    'shots.tabs': 'Экраны программы',
+    'shots.list': [
+      ['director', 'Панель директора', 'Заказы в работе, просрочки и этап каждого заказа — на одном экране.'],
+      ['board', 'Производственная доска', 'Каждый заказ — в колонке своего этапа. Видно и то, кто его сейчас держит.'],
+      ['analytics', 'Аналитика', 'По месяцам: сколько заказов пришло, сколько сдано и какая мебель приносит больше денег.'],
+      ['finance', 'Финансы', 'По каждому заказу: цена, оплачено, долг и прибыль. Расходы — по категориям.'],
+    ],
+    'shots.note': 'Цех, клиенты и цифры на экранах придуманы для примера.',
     'hero.note': 'Установим сами и обучим сотрудников.',
 
     'mock.title': 'Кухонный гарнитур — 3 шкафа', 'mock.badge': 'В срок',
@@ -1961,7 +2095,20 @@ const STR = {
     'hero.eyebrow': 'CRM for furniture workshops',
     'hero.title': 'Your workshop in your hand',
     'hero.lead': 'Orders, stock, workers and deadlines in one system — on the computer and on the phone. Your data stays on your own machine in the workshop.',
-    'hero.cta1': 'Try 14 days free', 'hero.cta2': 'See pricing',
+    'hero.cta1': 'Try 14 days free', 'hero.cta2': 'See pricing', 'hero.cta3': 'Video · 35 s',
+
+    'shots.eyebrow': 'The product itself',
+    'shots.title': 'Not a mock-up — the software, running',
+    'shots.lead': 'The essentials in a 35-second video. Below it, the real screens, filled with a sample workshop.',
+    'shots.play': 'Watch the video', 'shots.len': '35 seconds', 'shots.video': 'Video about Ustaxona',
+    'shots.tabs': 'App screens',
+    'shots.list': [
+      ['director', 'Director panel', 'Live orders, delays and the stage every order is at — on one screen.'],
+      ['board', 'Production board', 'Every order sits in the column of the stage it is at, with who has it in hand.'],
+      ['analytics', 'Analytics', 'Month by month: orders in, orders handed over, and which furniture brings in the money.'],
+      ['finance', 'Finance', 'Per order: price, paid, owed and margin. Expenses, by category.'],
+    ],
+    'shots.note': 'The workshop, clients and figures on screen are invented for the example.',
     'hero.note': 'We install it and train your staff.',
 
     'mock.title': 'Kitchen set — 3 cabinets', 'mock.badge': 'On time',
@@ -2207,6 +2354,8 @@ function render(lang) {
   const desc = document.querySelector('meta[name="description"]');
   if (desc) desc.content = t['meta.desc'];
 
+  renderShots(lang);
+
   // 17-stage rail — numbered because the pipeline genuinely is a sequence
   const rail = document.getElementById('rail');
   rail.textContent = '';
@@ -2400,6 +2549,86 @@ function pickLang() {
   const nav = (navigator.language || '').slice(0, 2).toLowerCase();
   return nav === 'ru' ? 'ru' : 'uz';
 }
+/* ============================================================
+   The product itself: the film and the screen tabs. Both are per language, so render()
+   calls renderShots() and they follow the switch with the rest of the page. A film that is
+   already playing is left alone — pulling it out from under the viewer would be worse than
+   a language mismatch they can fix by pressing play again.
+   ============================================================ */
+const film = document.getElementById('film-video');
+const filmCover = document.getElementById('film-cover');
+let shotIndex = 0;
+
+function renderShots(lang) {
+  document.getElementById('film-poster').src = 'media/video/poster-' + lang + '.webp';
+  if (!film.hidden && film.paused) {
+    film.src = 'media/video/promo-' + lang + '.mp4';
+    film.poster = 'media/video/poster-' + lang + '.webp';
+  }
+
+  const list = STR[lang]['shots.list'];
+  const tabs = document.getElementById('shot-tabs');
+  tabs.textContent = '';
+  list.forEach(([id, title], i) => {
+    const b = el('button', null, title);
+    b.type = 'button';
+    b.id = 'shot-tab-' + id;
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-controls', 'shot-panel');
+    b.addEventListener('click', () => showShot(i, lang));
+    tabs.appendChild(b);
+  });
+  showShot(shotIndex, lang, true);
+}
+
+function showShot(i, lang, quiet) {
+  const list = STR[lang]['shots.list'];
+  shotIndex = i;
+  const [id, title, body] = list[i];
+  document.querySelectorAll('#shot-tabs button').forEach((b, k) => {
+    b.setAttribute('aria-selected', String(k === i));
+    b.tabIndex = k === i ? 0 : -1;
+  });
+  document.getElementById('shot-panel').setAttribute('aria-labelledby', 'shot-tab-' + id);
+  const src = 'media/screens/' + id + '-' + lang + '.webp';
+  const img = document.getElementById('shot-img');
+  img.alt = title + ' — ' + body;
+  document.getElementById('shot-link').href = src;
+  const cap = document.getElementById('shot-cap');
+  cap.textContent = '';
+  cap.appendChild(el('b', null, title));
+  cap.appendChild(document.createTextNode(body));
+  if (img.getAttribute('src') === src) return;
+  if (quiet || still.matches) { img.src = src; return; }
+  // Dim while the next picture arrives, so a slow line shows something is happening.
+  img.classList.add('swapping');
+  const next = new Image();
+  next.onload = next.onerror = () => { img.src = src; img.classList.remove('swapping'); };
+  next.src = src;
+}
+
+// Arrow keys move between the tabs, as a tablist is expected to behave.
+document.getElementById('shot-tabs').addEventListener('keydown', e => {
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+  const n = STR[lang]['shots.list'].length;
+  const i = (shotIndex + (e.key === 'ArrowRight' ? 1 : n - 1)) % n;
+  showShot(i, lang);
+  document.querySelectorAll('#shot-tabs button')[i].focus();
+});
+
+function playFilm() {
+  if (film.hidden) {
+    film.src = 'media/video/promo-' + lang + '.mp4';
+    film.poster = 'media/video/poster-' + lang + '.webp';
+    film.hidden = false;
+    filmCover.hidden = true;
+  }
+  const p = film.play();
+  if (p && p.catch) p.catch(() => { /* blocked or not yet loaded: the controls are showing */ });
+}
+// The cover plays in place; the hero button lets the anchor scroll and starts it on arrival.
+document.querySelectorAll('[data-film-play]').forEach(n => n.addEventListener('click', playFilm));
+
 let lang = pickLang();
 document.querySelectorAll('.langs button').forEach(b => {
   b.addEventListener('click', () => {
@@ -2438,7 +2667,7 @@ if ('IntersectionObserver' in window && !still.matches) {
     });
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
   document.querySelectorAll(
-    '.sec-head, .row-head, .rows, .grid3, .also, .flow, .split, .cards, .soon-note, .plans, .fine, .road, .foot-in'
+    '.sec-head, .film, .shots, .row-head, .rows, .grid3, .also, .flow, .split, .cards, .soon-note, .plans, .fine, .road, .foot-in'
   ).forEach(node => { node.classList.add('rv'); seen.observe(node); });
 }
 

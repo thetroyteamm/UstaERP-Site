@@ -83,6 +83,35 @@ The 17 stage names are copied from the CRM's own translation table rather than r
 a stage is ever renamed there, rename it here too, or the site will describe a pipeline the
 software does not run.
 
+## The film, the screens and the share picture
+
+The first section after the hero shows the product itself: the promo film, then four real app
+screens under tabs. Both come in all three languages and follow the language switch.
+
+**The film** is `media/video/promo-<lang>.mp4`, a 720p cut (~2 MB) of the Remotion promo in
+`D:\Mebel_CRM\my-video`. It loads nothing until someone presses play. After re-rendering the
+promo, rebuild the web copies with the ffmpeg Remotion ships:
+
+    ..\my-video\node_modules\@remotion\compositor-win32-x64-msvc\ffmpeg.exe -i ..\my-video\out\ustaxona-promo-uz.mp4 -vf scale=1280:-2 -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 96k media\video\promo-uz.mp4
+
+`media/video/poster-<lang>.webp` is the frame at 21 s, the dashboard scene.
+
+**The screens** are `media/screens/<screen>-<lang>.webp`. They are taken from the real app,
+filled with a workshop that does not exist, so no real customer can ever show up on the page:
+
+1. `php tools/seed_screenshot_db.php` builds the local `mebel_crm_shots` database (schema from
+   `mebel_crm_design`, data invented; it refuses to touch the live `mebel_crm`).
+2. Serve the app against it — the `app-screenshots` entry in `D:\Mebel_CRM\.claude\launch.json`,
+   port 8770.
+3. `node tools/capture_screens.mjs` signs in through a headless Edge and writes all twelve.
+
+The tab labels and captions are `'shots.list'` in `STR`; the first field of each row is the
+file name.
+
+**The share picture** — what Telegram and the rest show for a link — is `media/og.jpg`,
+1200×630, the promo's title frame with the address under it. Its URL in `<head>` is absolute,
+so it only works once the page is served from `ustaxona.com`.
+
 ## The downloads
 
 The Android and Windows builds are offered on their own platform cards, each showing the
